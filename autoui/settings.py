@@ -35,34 +35,32 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # My APP
     'authentication',
-
     'django.contrib.sites',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 
     'rest_auth',
     'rest_auth.registration',
 
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_simplejwt',
-
-    # providers
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
-
 ]
-SITE_ID = 1
+
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/google/callback'
+LOGOUT_REDIRECT_URL = '/'
+MY_APP_URL = 'http://127.0.0.1:8000'
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.authentication.TokenAuthentication',
+
     ]
 }
 CCOUNT_AUTHENTICATION_METHOD = "email"
@@ -70,20 +68,14 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-
+    'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -94,8 +86,7 @@ ROOT_URLCONF = 'autoui.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -184,4 +175,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'samir155mohamed@gmail.com'
-EMAIL_HOST_PASSWORD = 'oerzeetxymldgohm'
+EMAIL_HOST_PASSWORD = 'hifjrhwyjovywgcc'

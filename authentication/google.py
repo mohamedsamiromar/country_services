@@ -1,24 +1,26 @@
-import urllib
+from allauth.socialaccount import providers
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from django.conf import settings
+from rest_framework.views import APIView
 
-from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from django.shortcuts import redirect
-from django.urls import reverse
-from rest_auth.registration.views import SocialLoginView
-
-
-class GoogleLogin(SocialLoginView):
-    adapter_class = GoogleOAuth2Adapter
-    client_class = OAuth2Client
-    callback_url = 'http://localhost:8000/accounts/google/login/callback/'
-
-    @property
-    def callback_url(self):
-        # use the same callback url as defined in your Google app, this url
-        # must be absolute:
-        return self.request.build_absolute_uri(reverse('google_callback'))
+#
+# @api_view(['GET'])
+# def get_google_url(request):
+#     provider = providers.registry.by_id('google', None)
+#     path = provider.get_login_url(request)
+#     url = settings.MY_APP_URL + path
+#     return Response({'url': url})
 
 
-def google_callback(request):
-    params = urllib.parse.urlencode(request.GET)
-    return redirect(f'http://localhost:8000/google/callback?{params}')
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_google_url(request):
+    provider = providers.registry.by_id('google', None)
+    path = provider.get_login_url(request)
+    url = settings.MY_APP_URL + path
+    return Response({'url': url})
+
+
