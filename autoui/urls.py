@@ -32,8 +32,6 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
 
     # path('auth/registration/', include('rest_auth.registration.urls')),
-
-    #
     path('login', views.obtain_auth_token, name='api_token_auth'),
     path('register', RegisterView.as_view()),
 
@@ -53,6 +51,6 @@ urlpatterns = [
     path('new_password/<int:pk>', NewPassword.as_view()),
 
     path('google/callback', GoogleLoginCallback.as_view()),
-    path('test', Test.as_view())
+    path('test', Test.as_view()),
 
 ]

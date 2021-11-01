@@ -1,3 +1,4 @@
+from Tools.scripts.var_access_benchmark import A
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from rest_framework import generics
@@ -11,9 +12,8 @@ from django.template.loader import render_to_string
 from .models import ForgetPassword
 import random
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework.authtoken.models import Token
-
 
 
 class RegisterView(generics.CreateAPIView):
@@ -136,14 +136,16 @@ class NewPassword(generics.GenericAPIView):
 
 
 class GoogleLoginCallback(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         token = Token.objects.create(user=request.user)
         return Response({'token': token.key}, status=status.HTTP_200_OK)
 
+
 class Test(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         return Response({'message': 'welcome'})
+
