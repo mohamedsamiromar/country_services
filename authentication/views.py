@@ -1,12 +1,10 @@
 import json
 
-from Tools.scripts.var_access_benchmark import A
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.timezone import now
 from rest_framework import generics
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from django.core.mail import EmailMessage
@@ -15,7 +13,7 @@ from django.template.loader import render_to_string
 from .models import ForgetPassword
 import random
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer
 from rest_framework.authtoken.models import Token
 
 
