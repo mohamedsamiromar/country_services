@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 from authentication.facebook import get_facebook_url
 from authentication.google import get_google_url
@@ -52,5 +53,7 @@ urlpatterns = [
 
     path('google/callback', GoogleLoginCallback.as_view()),
     path('test', Test.as_view()),
+
+    path('token', obtain_auth_token, name='api_token_auth'),
 
 ]

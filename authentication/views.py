@@ -1,5 +1,8 @@
+import json
+
 from Tools.scripts.var_access_benchmark import A
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.utils.timezone import now
 from rest_framework import generics
 from rest_framework import status
@@ -139,8 +142,9 @@ class GoogleLoginCallback(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        token = Token.objects.create(user=request.user)
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        token = Token.objects.get_or_create(user=request.user)
+        content = {'token': token[0].key}
+        return HttpResponse(json.dumps(content), content_type="application/json")
 
 
 class Test(APIView):
