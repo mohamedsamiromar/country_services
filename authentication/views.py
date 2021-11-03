@@ -40,8 +40,8 @@ class RegisterView(generics.CreateAPIView):
             user.save()
             return Response(token, status=status.HTTP_201_CREATED)
         return Response(RegisterSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+# python -m venv authentication autoui
+# source authentication autoui/bin/activate
 class VerifyEmail(APIView):
     permission_classes = (AllowAny,)
 
