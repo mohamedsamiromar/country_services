@@ -36,8 +36,9 @@ class RegisterView(generics.CreateAPIView):
             user.email = email
             user.username = username
             user.set_password(password)
+            token = Token.objects.get_or_create(user=request.user)
             user.save()
-            return Response(RegisterSerializer(user).data, status=status.HTTP_201_CREATED)
+            return Response(token, status=status.HTTP_201_CREATED)
         return Response(RegisterSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
