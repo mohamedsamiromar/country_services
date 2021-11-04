@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 
 ]
 
-SITE_ID = 1
+SITE_ID = 9
 
 LOGIN_REDIRECT_URL = '/google/callback'
 LOGOUT_REDIRECT_URL = '/'
