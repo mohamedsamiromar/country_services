@@ -36,7 +36,7 @@ class RegisterView(generics.CreateAPIView):
             user.last_name = last_name
             user.email = email
             user.username = username
-            user.set_password(password)
+            user.password = password
             user.save()
             return Response(RegisterSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(RegisterSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -121,26 +121,32 @@ class ForgetPasswordView(APIView):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def verification_code_view(request, pk=None):
+def verification_code_view(request, pk=id):
     user = ForgetPassword.objects.get(pk=pk)
-
     code = request.POST.get('verification_code')
-    if user.verification_code == code:
-        return Response("The Code is True", status=status.HTTP_200_OK)
+    if user.verification_code == int(code):
+        print("True")
+        return Response("Code is True", status=status.HTTP_201_CREATED)
     else:
+        print("False")
         return Response("Invalid Code", status=status.HTTP_400_BAD_REQUEST)
 
 
 class NewPassword(generics.GenericAPIView):
     permission_classes = (AllowAny,)
 
-    def get(self, request, pk=id):
-        user = ForgetPassword.objects.get(pk=pk)
-        new_password = request.GET.get('new password ')
+    def post(self, request, pk=id):
+        user = User.objects.get(pk=pk)
+        new_password = request.POST.get('new_password')
+        if new_password is None:
+            return Response("Please, Enter You New Password", status=status.HTTP_400_BAD_REQUEST)
         if user:
-            user.user.password = new_password
+            user.password = new_password
+            print(user.password)
             user.save()
-            return Response({"Message": "Your Password Is Chaged"}, status=status.HTTP_201_CREATED)
+            print(user.password)
+            if user.password == new_password:
+                return Response({"Message": "Your Password Is Chaged"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"Message": "THis User Is Not Found"}, status=status.HTTP_400_BAD_REQUEST)
 
