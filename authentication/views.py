@@ -83,54 +83,62 @@ class ForgetPasswordView(APIView):
 
     def get(self, request, pk=id):
         user = User.objects.get(pk=pk)
-        if user is None and pk is None:
-            return Response("invalid User", status=status.HTTP_400_BAD_REQUEST)
-
-        number = random.sample(range(10, 30), 2)
-        strings = [str(integer) for integer in number]
-        a_string = "".join(strings)
-        an_integer = int(a_string)
-        template = render_to_string('verification_code.html', {'code_number': an_integer})
-        email = EmailMessage(
-            'VerificationCode',
-            template,
-            settings.EMAIL_HOST_USER,
-            [user.email]).send()
-
         current_user = ForgetPassword.objects.get(user=user)
         if current_user:
+            number = random.sample(range(10, 30), 2)
+            strings = [str(integer) for integer in number]
+            a_string = "".join(strings)
+            an_integer = int(a_string)
+            template = render_to_string('verification_code.html', {'code_number': an_integer})
+            email = EmailMessage(
+                'VerificationCode',
+                template,
+                settings.EMAIL_HOST_USER,
+                [current_user.user.email]).send()
             current_user.verification_code = an_integer
             current_user.time = now()
             current_user.save()
-
+            return Response("Please, Check Yuor Eamil")
         else:
+            number = random.sample(range(10, 30), 2)
+            strings = [str(integer) for integer in number]
+            a_string = "".join(strings)
+            an_integer = int(a_string)
+            template = render_to_string('verification_code.html', {'code_number': an_integer})
+            email = EmailMessage(
+                'VerificationCode',
+                template,
+                settings.EMAIL_HOST_USER,
+                [user.email]).send()
             forget_password = ForgetPassword()
             forget_password.time = now()
             forget_password.user = user
             forget_password.verification_code = an_integer
             forget_password.save()
-            return Response({"Message": "Please Check Your Email"}, status=status.HTTP_200_OK)
+
+        return Response({"Message": "Please Check Your Email"}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def verification_code_view(request, pk=id):
-    user = ForgetPassword.objects.get(user=pk)
-    if user is None:
-        return Response("invalid User", status=status.HTTP_400_BAD_REQUEST)
+def verification_code_view(request, pk=None):
+    user = ForgetPassword.objects.get(pk=pk)
+
     code = request.POST.get('verification_code')
-    if code is None:
-        return Response("invalid code", status=status.HTTP_400_BAD_REQUEST)
+    if user.verification_code == code:
+        return Response("The Code is True", status=status.HTTP_200_OK)
+    else:
+        return Response("Invalid Code", status=status.HTTP_400_BAD_REQUEST)
 
 
 class NewPassword(generics.GenericAPIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, pk=id):
-        user = User.objects.get(pk=pk)
+        user = ForgetPassword.objects.get(pk=pk)
         new_password = request.GET.get('new password ')
         if user:
-            user.password = new_password
+            user.user.password = new_password
             user.save()
             return Response({"Message": "Your Password Is Chaged"}, status=status.HTTP_201_CREATED)
         else:
