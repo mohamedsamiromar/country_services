@@ -20,7 +20,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from authentication.facebook import get_facebook_url
 from authentication.google import get_google_url
-from authentication.views import VerifyEmail, ConfirmEmail, ForgetPasswordView, VerificationCodeView, NewPassword, \
+from authentication.views import VerifyEmail, ConfirmEmail, ForgetPasswordView, verification_code_view, NewPassword, \
     RegisterView, GoogleLoginCallback, Test
 from django.contrib.auth.views import LogoutView
 
@@ -48,7 +48,7 @@ urlpatterns = [
 
     # forget password
     path('forget_password/<int:pk>', ForgetPasswordView.as_view()),
-    path('verification_code/<int:pk>', VerificationCodeView.as_view()),
+    path('verification_code/<int:pk>', verification_code_view),
     path('new_password/<int:pk>', NewPassword.as_view()),
 
     path('google/callback', GoogleLoginCallback.as_view()),

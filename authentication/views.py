@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.utils.timezone import now
 from rest_framework import generics
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from django.core.mail import EmailMessage
@@ -45,7 +46,11 @@ class VerifyEmail(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, pk=None):
+        if pk is None:
+            return Response({"message": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
         user = User.objects.get(pk=pk)
+        if user is None:
+            return Response({"message": "User Not Found"}, status=status.HTTP_400_BAD_REQUEST)
         if user:
             if user.is_active:
                 return Response({"Message": "Your Email Is Verify"})
@@ -78,48 +83,44 @@ class ForgetPasswordView(APIView):
 
     def get(self, request, pk=id):
         user = User.objects.get(pk=pk)
-        number = random.sample(range(10, 30), 2)
+        if user is None and pk is None:
+            return Response("invalid User", status=status.HTTP_400_BAD_REQUEST)
 
+        number = random.sample(range(10, 30), 2)
         strings = [str(integer) for integer in number]
         a_string = "".join(strings)
         an_integer = int(a_string)
+        template = render_to_string('verification_code.html', {'code_number': an_integer})
+        email = EmailMessage(
+            'VerificationCode',
+            template,
+            settings.EMAIL_HOST_USER,
+            [user.email]).send()
 
-        print(an_integer)
-        if user:
-            template = render_to_string('verification_code.html', {'code_number': an_integer})
-            email = EmailMessage(
-                'VerificationCode',
-                template,
-                settings.EMAIL_HOST_USER,
-                [user.email]).send()
+        current_user = ForgetPassword.objects.get(user=user)
+        if current_user:
+            current_user.verification_code = an_integer
+            current_user.time = now()
+            current_user.save()
 
+        else:
             forget_password = ForgetPassword()
             forget_password.time = now()
             forget_password.user = user
             forget_password.verification_code = an_integer
-            if forget_password.verification_code:
-                forget_password.verification_code = an_integer
-            else:
-                forget_password.verification_code = an_integer
             forget_password.save()
             return Response({"Message": "Please Check Your Email"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"Message": "This Email Is Not Found"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class VerificationCodeView(generics.GenericAPIView):
-    permission_classes = (AllowAny,)
-
-    def get(self, request, pk=id):
-        user = ForgetPassword.objects.get(user=pk)
-        code = request.GET.get('verification_code')
-        if user:
-            if code == user.verification_code:
-                return Response(status=status.HTTP_201_CREATED)
-            else:
-                return Response({"Message": "This Code Is Expired"}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response({"Message": "THis User Is Not Found"}, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verification_code_view(request, pk=id):
+    user = ForgetPassword.objects.get(user=pk)
+    if user is None:
+        return Response("invalid User", status=status.HTTP_400_BAD_REQUEST)
+    code = request.POST.get('verification_code')
+    if code is None:
+        return Response("invalid code", status=status.HTTP_400_BAD_REQUEST)
 
 
 class NewPassword(generics.GenericAPIView):
@@ -150,4 +151,3 @@ class Test(APIView):
 
     def get(self, request):
         return Response({'message': 'welcome'})
-
