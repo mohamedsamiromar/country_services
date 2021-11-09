@@ -34,18 +34,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # My Apps
     'authentication',
-    'django.contrib.sites',
+    'restaurant',
 
+    # allauth
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 
+    # rest auth
     'rest_auth',
     'rest_auth.registration',
-
+    # django rest framework
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
