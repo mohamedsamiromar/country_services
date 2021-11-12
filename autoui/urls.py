@@ -57,5 +57,8 @@ urlpatterns = [
     path('token', obtain_auth_token, name='api_token_auth'),
 
     path('restauran/', include('restaurant.urls')),
+    path('', include('location.urls')),
+
+
 
 ]

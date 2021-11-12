@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from django.conf import settings
 from rest_framework.views import APIView
 
+
 #
 # @api_view(['GET'])
 # def get_google_url(request):
@@ -14,7 +15,6 @@ from rest_framework.views import APIView
 #     return Response({'url': url})
 
 
-
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_google_url(request):
@@ -22,5 +22,3 @@ def get_google_url(request):
     path = provider.get_login_url(request)
     url = settings.MY_APP_URL + path
     return Response({'url': url})
-
-
