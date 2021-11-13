@@ -21,9 +21,6 @@ def get_current_location(request):
     country = location_data.get('country')
     region_name = location_data.get('regionName')
     if serializer.is_valid():
-        # city = serializer.validated_data['city']
-        # country = serializer.validated_data['country']
-        # region_name = serializer.validated_data['region_name']
         current_location = CurrentLocation()
         user = request.user
         current_location.User = user
