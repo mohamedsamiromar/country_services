@@ -151,17 +151,25 @@ class NewPassword(generics.GenericAPIView):
             return Response({"Message": "THis User Is Not Found"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GoogleLoginCallback(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        token = Token.objects.get_or_create(user=request.user)
-        content = {'token': token[0].key}
-        return HttpResponse(json.dumps(content), content_type="application/json")
-
+# class GoogleLoginCallback(APIView):
+#     permission_classes = (IsAuthenticated,)
+#
+#     def get(self, request):
+#         token = Token.objects.get_or_create(user=request.user)
+#         content = {'token': token[0].key}
+#         return HttpResponse(json.dumps(content), content_type="application/json")
+#
 
 class Test(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         return Response({'message': 'welcome'})
+
+
+class GoogleLoginCallback(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        token = Token.objects.create(user=request.user)
+        return Response({'token': token.key}, status=status.HTTP_200_OK)
