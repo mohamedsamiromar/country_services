@@ -10,6 +10,8 @@ class CurrentLocation(models.Model):
     country = models.CharField(max_length=150, null=True)
     city = models.CharField(max_length=150, null=True)
     region_name = models.CharField(max_length=150, null=True)
+    longitude = models.FloatField(null=True)
+    latitude = models.FloatField(null=True)
 
     def __str__(self):
         return self.city

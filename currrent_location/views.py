@@ -9,7 +9,7 @@ from currrent_location.serializers import CurrentLocationSerializer
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_current_location(request):
     serializer = CurrentLocationSerializer(data=request.data)
     ip = requests.get('https://api.ipify.org?format=json')
@@ -20,6 +20,8 @@ def get_current_location(request):
     city = location_data.get('city')
     country = location_data.get('country')
     region_name = location_data.get('regionName')
+    latitude = location_data.get('lat')
+    longitude = location_data.get('lon')
     if serializer.is_valid():
         current_location = CurrentLocation()
         user = request.GET.get('user')
@@ -27,6 +29,14 @@ def get_current_location(request):
         current_location.city = city
         current_location.country = country
         current_location.region_name = region_name
+        current_location.longitude = longitude
+        current_location.latitude = latitude
         current_location.save()
-        return Response(CurrentLocationSerializer(current_location).data, status=status.HTTP_200_OK)
+        context = {
+            'data': location_data
+        }
+        return Response(context, status=status.HTTP_201_CREATED)
+        # return Response(CurrentLocationSerializer(current_location).data, status=status.HTTP_200_OK)
     return Response(CurrentLocationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
