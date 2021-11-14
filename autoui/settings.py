@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     # My Apps
     'authentication',
     'restaurant',
-    'location',
+    'currrent_location',
 
     # allauth
     'django.contrib.sites',

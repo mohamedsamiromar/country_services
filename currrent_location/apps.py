@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LocationConfig(AppConfig):
+class CurrrentLocationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'location'
+    name = 'currrent_location'
