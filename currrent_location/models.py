@@ -19,7 +19,13 @@ class City(models.Model):
     city_2 = models.CharField(max_length=150, null=True)
     city_3 = models.CharField(max_length=150, null=True)
 
+    def __str__(self):
+        return self.city_1
+
 
 class GetLocationManual(models.Model):
     country = models.CharField(max_length=150, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.country, self.city.city_1, self.city.city_2, self.city.city_3
