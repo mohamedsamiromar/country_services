@@ -990,7 +990,7 @@ var required = require('requires-port')
  * 1. The property we should set when parsing this value.
  * 2. Indication if it's backwards or forward parsing, when set as number it's
  *    the value of extra chars that should be split off.
- * 3. Inherit from location if non existing in the parser.
+ * 3. Inherit from get_location if non existing in the parser.
  * 4. `toLowerCase` the resulting value.
  */
 var rules = [
@@ -1350,14 +1350,14 @@ var ignore = { hash: 1, query: 1 }
   , URL;
 
 /**
- * The location object differs when your code is loaded through a normal page,
+ * The get_location object differs when your code is loaded through a normal page,
  * Worker or through a worker using a blob. And with the blobble begins the
- * trouble as the location object will contain the URL of the blob, not the
- * location of the page where our code is loaded in. The actual origin is
+ * trouble as the get_location object will contain the URL of the blob, not the
+ * get_location of the page where our code is loaded in. The actual origin is
  * encoded in the `pathname` so we can thankfully generate a good "default"
- * location from it so we can generate proper relative URL's again.
+ * get_location from it so we can generate proper relative URL's again.
  *
- * @param {Object|String} loc Optional default location object.
+ * @param {Object|String} loc Optional default get_location object.
  * @returns {Object} lolcation object.
  * @api public
  */

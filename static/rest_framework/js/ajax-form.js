@@ -94,7 +94,7 @@ function doAjaxSubmit(e) {
       replaceDocument(jqXHR.responseText);
 
       try {
-        // Modify the location and scroll to top, as if after page load.
+        // Modify the get_location and scroll to top, as if after page load.
         history.replaceState({}, '', url);
         scroll(0, 0);
       } catch (err) {

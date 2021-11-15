@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from . models import CurrentLocation
+from .models import CurrentLocation
 from currrent_location.serializers import CurrentLocationSerializer
 
 
@@ -32,11 +32,5 @@ def get_current_location(request):
         current_location.longitude = longitude
         current_location.latitude = latitude
         current_location.save()
-        context = {
-            'data': location_data
-        }
-        return Response(context, status=status.HTTP_201_CREATED)
-        # return Response(CurrentLocationSerializer(current_location).data, status=status.HTTP_200_OK)
+        return Response(CurrentLocationSerializer().data, status=status.HTTP_200_OK)
     return Response(CurrentLocationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
