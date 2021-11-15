@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CurrentLocation, GetLocationManual
+from .models import CurrentLocation, GetLocationManual, SelecteCountryAndCity
 
 
 class CurrentLocationSerializer(serializers.ModelSerializer):
@@ -32,3 +32,9 @@ class CurrentLocationManualSerializer(serializers.ModelSerializer):
 
     def get_city_3(self, obj):
         return CitySerializer(obj.city_3).data
+
+
+class SelecteCountryAndCitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelecteCountryAndCity
+        fields = ['user', 'country', 'city']

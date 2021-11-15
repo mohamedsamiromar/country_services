@@ -4,9 +4,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from .models import CurrentLocation, GetLocationManual
-from currrent_location.serializers import CurrentLocationSerializer,CurrentLocationManualSerializer
-
+from .models import CurrentLocation, GetLocationManual, SelecteCountryAndCity, City
+from currrent_location.serializers import CurrentLocationSerializer, CurrentLocationManualSerializer, \
+    SelecteCountryAndCitySerializer
 
 
 @api_view(['GET'])
@@ -45,3 +45,25 @@ def get_current_location_manual(request):
         location = GetLocationManual.objects.all()
         serializer = CurrentLocationManualSerializer(location, many=True)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def select_country_city(request):
+    serializer = SelecteCountryAndCitySerializer(data=request.data)
+    if serializer.is_valid():
+        user = request.user
+        country = request.POST.get('country')
+        city = request.POST.get('city')
+        select_country = SelecteCountryAndCity()
+        select_country.User = user
+        select_country.country = country
+        select_country.city = city
+        get_country = GetLocationManual.objects.get(country=country)
+        get_city = City.objects.get(city_1=city)
+        if country == get_country and city == get_city or get_country and get_city is None:
+            select_country.save()
+            return Response(SelecteCountryAndCitySerializer(select_country).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"Message": "You Country it's not available"})
+        # return Response(CurrentLocationSerializer(select_country).data, status=status.HTTP_201_CREATED)
