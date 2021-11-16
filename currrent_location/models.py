@@ -35,3 +35,5 @@ class SelecteCountryAndCity(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     country = models.CharField(max_length=150, null=True)
     city = models.CharField(max_length=150, null=True)
+
+

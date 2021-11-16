@@ -1,12 +1,13 @@
 import json
 import requests
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .models import CurrentLocation, GetLocationManual, SelecteCountryAndCity
-from currrent_location.serializers import CurrentLocationSerializer,CurrentLocationManualSerializer, SelecteCountryAndCitySerializer
-
+from currrent_location.serializers import CurrentLocationSerializer, CurrentLocationManualSerializer, \
+    SelecteCountryAndCitySerializer
 
 
 @api_view(['GET'])
@@ -25,7 +26,7 @@ def get_current_location(request):
     longitude = location_data.get('lon')
     if serializer.is_valid():
         current_location = CurrentLocation()
-        user = request.GET.get('user')
+        user = request.user
         current_location.User = user
         current_location.city = city
         current_location.country = country
@@ -47,12 +48,16 @@ def get_current_location_manual(request):
         return Response(serializer.data)
 
 
-
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
-def select_country_city(request):
+def select_country_city_view(request, pk=None):
     serializer = SelecteCountryAndCitySerializer(data=request.data)
+    location = GetLocationManual.objects.get(pk=pk)
     if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(CurrentLocationSerializer().errors, status=status.HTTP_201_CREATED)
+        select_country_city = SelecteCountryAndCity()
+        select_country_city.User = request.user
+        select_country_city.country = location.country
+        select_country_city.city = location.city
+        select_country_city.save()
+        return Response(SelecteCountryAndCitySerializer(select_country_city).data, status=status.HTTP_201_CREATED)
+    return Response(SelecteCountryAndCitySerializer.errors, status=status.HTTP_201_CREATED)

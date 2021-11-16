@@ -22,7 +22,7 @@ class CurrentLocationManualSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GetLocationManual
-        fields = ['country', 'city_1', 'city_2', 'city_3']
+        fields = ['id', 'country', 'city_1', 'city_2', 'city_3']
 
     def get_city_1(self, obj):
         return CitySerializer(obj.city_1).data
