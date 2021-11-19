@@ -27,7 +27,7 @@ def get_current_location(request):
     if serializer.is_valid():
         current_location = CurrentLocation()
         user = request.user
-        current_location.User = user
+        current_user = request.user
         current_location.city = city
         current_location.country = country
         current_location.region_name = region_name
@@ -61,3 +61,6 @@ def select_country_city_view(request, pk=None):
         select_country_city.save()
         return Response(SelecteCountryAndCitySerializer(select_country_city).data, status=status.HTTP_201_CREATED)
     return Response(SelecteCountryAndCitySerializer.errors, status=status.HTTP_201_CREATED)
+#
+# python manage.py --settings=autoui.settings runserver/syncdb
+# python manage.py runserver --settings=autoui.settings.dev

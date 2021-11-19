@@ -16,3 +16,8 @@ try:
     from .local import *
 except:
     pass
+'''
+use it, when run project in development 
+python manage.py runserver --settings=autoui.settings.dev
+
+'''
