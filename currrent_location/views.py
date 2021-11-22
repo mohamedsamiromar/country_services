@@ -4,10 +4,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from .models import CurrentLocation, GetLocationManual, SelecteCountryAndCity
 from currrent_location.serializers import CurrentLocationSerializer, CurrentLocationManualSerializer, \
     SelecteCountryAndCitySerializer
+from .pagination import LargeResultsSetPagination, StandardResultsSetPagination
 
 
 @api_view(['GET'])
@@ -26,7 +27,6 @@ def get_current_location(request):
     longitude = location_data.get('lon')
     if serializer.is_valid():
         current_location = CurrentLocation()
-        user = request.user
         current_user = request.user
         current_location.city = city
         current_location.country = country
@@ -39,13 +39,11 @@ def get_current_location(request):
     return Response(CurrentLocationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_current_location_manual(request):
-    if request.method == 'GET':
-        location = GetLocationManual.objects.all()
-        serializer = CurrentLocationManualSerializer(location, many=True)
-        return Response(serializer.data)
+class GetCurrentLocationaManualy(generics.ListAPIView):
+    permission_classes = [AllowAny]
+    queryset = GetLocationManual.objects.all()
+    serializer_class = CurrentLocationManualSerializer
+    pagination_class = LargeResultsSetPagination
 
 
 @api_view(['GET'])
@@ -61,6 +59,6 @@ def select_country_city_view(request, pk=None):
         select_country_city.save()
         return Response(SelecteCountryAndCitySerializer(select_country_city).data, status=status.HTTP_201_CREATED)
     return Response(SelecteCountryAndCitySerializer.errors, status=status.HTTP_201_CREATED)
-#
+
 # python manage.py --settings=autoui.settings runserver/syncdb
 # python manage.py runserver --settings=autoui.settings.dev
