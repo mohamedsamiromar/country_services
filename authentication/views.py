@@ -2,7 +2,9 @@ import json
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -158,18 +160,34 @@ class NewPassword(generics.GenericAPIView):
 #         token = Token.objects.get_or_create(user=request.user)
 #         content = {'token': token[0].key}
 #         return HttpResponse(json.dumps(content), content_type="application/json")
+# #
+#
+# class Test(APIView):
+#     permission_classes = (IsAuthenticated,)
+#
+#     def get(self, request):
+#         return Response({'message': 'welcome'})
+#
+#
+# class GoogleLoginCallback(APIView):
+#     permission_classes = (AllowAny,)
+#
+#     def get(self, request):
+#         token = Token.objects.create(user=request.user)
+#         return Response({'token': token.key}, status=status.HTTP_200_OK)
 #
 
-class Test(APIView):
-    permission_classes = (IsAuthenticated,)
+
+def google_callback_token(request):
+        token = Token.objects.get_or_create(user=request.user)
+        content = {'token': token[0].key}
+        return HttpResponse(json.dumps(content), content_type="application/json")
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class HelloView(APIView):
+    permission_classes = (IsAuthenticated,)             # <-- And here
 
     def get(self, request):
-        return Response({'message': 'welcome'})
-
-
-class GoogleLoginCallback(APIView):
-    permission_classes = (AllowAny,)
-
-    def get(self, request):
-        token = Token.objects.create(user=request.user)
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        content = {'message': 'Hello, World!'}
+        return Response(content)

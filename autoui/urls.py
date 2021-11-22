@@ -18,10 +18,6 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework.authtoken.views import obtain_auth_token
 
-from authentication.facebook import get_facebook_url
-from authentication.google import get_google_url
-from authentication.views import VerifyEmail, ConfirmEmail, ForgetPasswordView, verification_code_view, NewPassword, \
-    RegisterView, GoogleLoginCallback, Test
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -34,30 +30,13 @@ urlpatterns = [
 
     # path('auth/registration/', include('rest_auth.registration.urls')),
     path('login', views.obtain_auth_token, name='api_token_auth'),
-    path('register', RegisterView.as_view()),
 
-    # VerifyEmail
-    path('verify-email/<int:pk>', VerifyEmail.as_view(), name='verify-email'),
-    path('confirm_email/<int:pk>', ConfirmEmail.as_view(), name='confirm_email'),
-
-    # FaceBook Signin
-    path("facebook-url", get_facebook_url, name="facebook-login"  ),
-
-    # Google SignIn
-    path('google-url', get_google_url),
-
-    # forget password
-    path('forget_password/<int:pk>', ForgetPasswordView.as_view()),
-    path('verification_code/<int:pk>', verification_code_view),
-    path('new_password/<int:pk>', NewPassword.as_view()),
-
-    path('google/callback', GoogleLoginCallback.as_view()),
-    path('test', Test.as_view()),
 
     path('token', obtain_auth_token, name='api_token_auth'),
 
     path('restauran/', include('restaurant.urls')),
     path('', include('currrent_location.urls')),
+    path('', include('authentication.urls')),
 
 
 
