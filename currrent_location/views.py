@@ -80,3 +80,8 @@ def select_country_city_view(request, pk=None):
 
 # python manage.py --settings=autoui.settings runserver/syncdb
 # python manage.py runserver --settings=autoui.settings.dev
+
+
+# ssh root@159.223.0.74 -p22
+#
+# iBuildx%%%1234Ume
