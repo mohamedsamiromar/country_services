@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-8ngs)3t=ydrnzvy9&e!2rpu^l!5d#t$6@_8r-1g9_2(t+s3k39
 DEBUG = True
 # http://67.207.72.87/accounts/facebook/login/ Site.objects.create(
 # domain='http://67.207.72.87/accounts/facebook/login/', name='http://67.207.72.87/accounts/facebook/login/')
-ALLOWED_HOSTS = ['67.207.72.87', 'autourapi.cf', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['159.223.0.74', 'autourapi.cf', '127.0.0.1', 'localhost']
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
