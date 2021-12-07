@@ -82,6 +82,4 @@ def select_country_city_view(request, pk=None):
 # python manage.py runserver --settings=autoui.settings.dev
 
 
-# ssh root@159.223.0.74 -p22
-#
-# iBuildx%%%1234Ume
+# (venv) root@ubuntu-s-1vcpu-2gb-intel-ams3-01:~/autour-backend# python manage.py runserver 0.0.0.0:8000
