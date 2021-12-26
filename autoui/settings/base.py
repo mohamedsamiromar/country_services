@@ -26,6 +26,15 @@ INSTALLED_APPS = [
     'authentication',
     'restaurant',
     'currrent_location',
+    'activite',
+    'city_games',
+    'hotel',
+    'mall',
+    'mosque',
+    'park',
+    'parking',
+    'service',
+    'vacance',
 
     # allauth
     'django.contrib.sites',
@@ -43,6 +52,7 @@ INSTALLED_APPS = [
     'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+
 
 ]
 

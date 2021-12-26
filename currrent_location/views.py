@@ -44,7 +44,6 @@ def current_location_view(request):
         return Response(CurrentLocationSerializer(current_location).data, status=status.HTTP_200_OK)
     return Response(CurrentLocationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # python manage.py --settings=autoui.settings runserver/syncdb
 # python manage.py runserver --settings=autoui.settings.dev
 
