@@ -1,8 +1,8 @@
 from django.urls import path
 from currrent_location import views as current_view
+from django_restful_admin import admin as api_admin
 
 urlpatterns = [
-    path('current_location', current_view.get_current_location, name='get_current_location'),
-    path('location', current_view.GetCurrentLocationaManualy.as_view(), name='location'),
-    path('select_location/<int:pk>', current_view.select_country_city_view, name='select_location'),
+    path('apiadmin/', api_admin.site.urls),
+    path('current_location', current_view.current_location_view, name='get_current_location'),
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     # django rest framework
     'rest_framework',
+    'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
 

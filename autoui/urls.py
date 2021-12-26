@@ -38,6 +38,4 @@ urlpatterns = [
     path('', include('currrent_location.urls')),
     path('', include('authentication.urls')),
 
-
-
 ]
