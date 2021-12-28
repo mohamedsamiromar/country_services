@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('currrent_location', '0003_selectecountryandcity'),
+        ('location', '0003_selectecountryandcity'),
     ]
 
     operations = [

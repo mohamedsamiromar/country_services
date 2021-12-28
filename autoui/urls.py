@@ -28,14 +28,14 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
 
-    # path('auth/registration/', include('rest_auth.registration.urls')),
+    path('auth/registration/', include('rest_auth.registration.urls')),
     path('login', views.obtain_auth_token, name='api_token_auth'),
 
 
     path('token', obtain_auth_token, name='api_token_auth'),
 
     path('restauran/', include('restaurant.urls')),
-    path('', include('currrent_location.urls')),
+    path('', include('location.urls')),
     path('', include('authentication.urls')),
 
 ]

@@ -14,6 +14,7 @@ DEBUG = True
 # http://67.207.72.87/accounts/facebook/login/ Site.objects.create(
 # domain='http://67.207.72.87/accounts/facebook/login/', name='http://67.207.72.87/accounts/facebook/login/')
 ALLOWED_HOSTS = ['159.223.0.74', 'autourapi.cf', '127.0.0.1', 'localhost']
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,7 +26,7 @@ INSTALLED_APPS = [
     # My Apps
     'authentication',
     'restaurant',
-    'currrent_location',
+    'location',
     'activite',
     'city_games',
     'hotel',
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
     'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-
 
 ]
 

@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('currrent_location', '0006_remove_currentlocation_user'),
+        ('location', '0006_remove_currentlocation_user'),
     ]
 
     operations = [

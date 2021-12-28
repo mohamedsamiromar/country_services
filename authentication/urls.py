@@ -2,8 +2,10 @@ from django.urls import path
 from authentication import views as current_view
 from authentication.google import get_google_url
 from authentication.facebook import get_facebook_url
-
+from . views import RegisterView
 urlpatterns = [
+    # Register
+    path('register', RegisterView.as_view(), name='register'),
     # VerifyEmail
     path('verify-email/<int:pk>', current_view.VerifyEmail.as_view(), name='verify-email'),
     path('confirm_email/<int:pk>', current_view.ConfirmEmail.as_view(), name='confirm_email'),

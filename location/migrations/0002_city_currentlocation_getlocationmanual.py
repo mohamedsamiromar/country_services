@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('currrent_location', '0001_initial'),
+        ('location', '0001_initial'),
     ]
 
     operations = [
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('country', models.CharField(max_length=150, null=True)),
-                ('city', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='currrent_location.city')),
+                ('city', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='location.city')),
             ],
         ),
         migrations.CreateModel(

@@ -1,5 +1,5 @@
 from django.urls import path
-from currrent_location import views as current_view
+from location import views as current_view
 from django_restful_admin import admin as api_admin
 
 urlpatterns = [
