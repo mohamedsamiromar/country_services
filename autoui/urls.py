@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
-from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from django.contrib.auth.views import LogoutView
 
@@ -32,7 +35,8 @@ urlpatterns = [
     path('login', views.obtain_auth_token, name='api_token_auth'),
 
 
-    path('token', obtain_auth_token, name='api_token_auth'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('restauran/', include('restaurant.urls')),
     path('', include('location.urls')),

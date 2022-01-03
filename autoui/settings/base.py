@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'parking',
     'service',
     'vacance',
-
+    'accounts',
     # allauth
     'django.contrib.sites',
     'allauth',
@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-
 ]
 
 SITE_ID = 9
@@ -64,8 +63,12 @@ MY_APP_URL = 'http://autourapi.cf'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_PARSER_CLASSES': [
+            'rest_framework.parsers.JSONParser',
+        ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
 }
