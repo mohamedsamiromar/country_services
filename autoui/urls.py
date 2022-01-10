@@ -20,6 +20,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework_simplejwt import views as jwt_views
+
 
 from django.contrib.auth.views import LogoutView
 
@@ -34,9 +36,8 @@ urlpatterns = [
     path('auth/registration/', include('rest_auth.registration.urls')),
     path('login', views.obtain_auth_token, name='api_token_auth'),
 
-
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/', include('location.urls')),
     path('auth/', include('authentication.urls')),

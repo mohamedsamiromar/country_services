@@ -1,8 +1,6 @@
-from django.contrib.auth.models import AbstractUser
-from django.db import models
 from location.models import *
 from django.conf import settings
-from accounts.models import Country, BaseModel, CustomUser
+from accounts.models import Country, BaseModel
 
 
 class ResturantRegisterApplication(BaseModel):
@@ -19,10 +17,13 @@ class ResturantRegisterApplication(BaseModel):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     start_working = models.DateTimeField(null=True, blank=True)
     end_working = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=155, choices=(
-        (201, 'Open'),
-        (405, 'Closed'),
-    ), default='Open')
+    status = models.IntegerField(
+        choices=(
+            (200, 'New'),
+            (201, 'Approved'),
+            (400, 'Rejected'),
+        ), default=200
+    )
 
 
 class ResturanProfile(BaseModel):
@@ -36,6 +37,10 @@ class ResturanProfile(BaseModel):
     country = models.CharField(max_length=75, null=True, blank=True, default=False)
     occupied_table = models.IntegerField(null=True, blank=True, default=False)
     available_table = models.IntegerField(null=True, blank=True, default=False)
+    status = models.CharField(max_length=155, choices=(
+        (201, 'Open'),
+        (405, 'Closed'),
+    ), default='Open')
 
 
 class Menu(BaseModel):
