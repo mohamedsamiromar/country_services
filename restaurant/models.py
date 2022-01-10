@@ -10,7 +10,7 @@ class ResturantRegisterApplication(BaseModel):
     user_name = models.CharField(max_length=25, null=True, blank=True)
     last_name = models.CharField(max_length=25, null=True, blank=True)
     password = models.CharField(max_length=150, null=True, blank=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
     mobile_number = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=155, null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
@@ -26,16 +26,16 @@ class ResturantRegisterApplication(BaseModel):
 
 
 class ResturanProfile(BaseModel):
-    name = models.CharField(max_length=150, null=True, blank=True, )
-    address = models.CharField(max_length=155, null=True, blank=True)
-    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=150, null=True, blank=True, default=False)
+    address = models.CharField(max_length=155, null=True, blank=True, default=False)
+    email = models.EmailField(unique=True, null=True, blank=True, default=False)
     menu = models.ForeignKey('Menu',
                              on_delete=models.CASCADE,
-                             null=True, blank=True)
-    city = models.CharField(max_length=75, null=True, blank=True)
-    country = models.CharField(max_length=75, null=True, blank=True)
-    occupied_table = models.IntegerField(null=True, blank=True)
-    available_table = models.IntegerField(null=True, blank=True)
+                             null=True, blank=True, default=False)
+    city = models.CharField(max_length=75, null=True, blank=True, default=False)
+    country = models.CharField(max_length=75, null=True, blank=True, default=False)
+    occupied_table = models.IntegerField(null=True, blank=True, default=False)
+    available_table = models.IntegerField(null=True, blank=True, default=False)
 
 
 class Menu(BaseModel):
@@ -43,8 +43,10 @@ class Menu(BaseModel):
 
 
 class DelivaryOrder(BaseModel):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    resturant = models.ForeignKey(ResturanProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, null=True, blank=True)
+    resturant = models.ForeignKey(ResturanProfile,
+                                  on_delete=models.CASCADE, null=True, blank=True)
     order_count = models.IntegerField(null=True, blank=True)
     user_mobile_number = models.CharField(max_length=11, null=True, blank=True)
 

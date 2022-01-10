@@ -67,7 +67,7 @@ class Country(BaseModel):
         ('FRA', 'France'),
         ('SWZ', 'Switzerland'),
         ('BLG', 'Belgium'),
-    ), blank=True, null=True, max_length=150
+    ), blank=True, null=True, max_length=150, default=False
     )
 
     def __str__(self):
