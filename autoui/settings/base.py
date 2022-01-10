@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
 SITE_ID = 9
 
 LOGIN_REDIRECT_URL = '/google/callback'
@@ -186,3 +189,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'samir155mohamed@gmail.com'
 EMAIL_HOST_PASSWORD = 'hifjrhwyjovywgcc'
+
+
+

@@ -38,8 +38,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('restauran/', include('restaurant.urls')),
-    path('', include('location.urls')),
-    path('', include('authentication.urls')),
+    path('api/', include('location.urls')),
+    path('auth/', include('authentication.urls')),
+    path('api/resturant/', include('restaurant.urls')),
 
 ]
