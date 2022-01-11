@@ -26,7 +26,7 @@ class ResturantRegisterApplication(BaseModel):
     )
 
 
-class ResturanProfile(BaseModel):
+class ResturantProfile(BaseModel):
     name = models.CharField(max_length=150, null=True, blank=True, default=False)
     address = models.CharField(max_length=155, null=True, blank=True, default=False)
     email = models.EmailField(unique=True, null=True, blank=True, default=False)
@@ -46,11 +46,10 @@ class ResturanProfile(BaseModel):
 class Menu(BaseModel):
     pass
 
-
 class DelivaryOrder(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, null=True, blank=True)
-    resturant = models.ForeignKey(ResturanProfile,
+    resturant = models.ForeignKey(ResturantProfile,
                                   on_delete=models.CASCADE, null=True, blank=True)
     order_count = models.IntegerField(null=True, blank=True)
     user_mobile_number = models.CharField(max_length=11, null=True, blank=True)
