@@ -3,8 +3,6 @@ from django.conf import settings
 
 
 class CurrentLocation(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, default=False, blank=True)
     country = models.CharField(
         max_length=55, null=True, blank=True, default=False)
     city = models.CharField(

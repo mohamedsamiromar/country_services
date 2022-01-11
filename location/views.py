@@ -34,7 +34,6 @@ def current_location_view(request):
     longitude = location_data.get('lon')
     if serializer.is_valid(raise_exception=True):
         current_location = CurrentLocation()
-        # current_user = request.user
         # current_location.city = serializer.validated_data['city']
         # current_location.country = serializer.validated_data['country']
         # current_location.region_name = serializer.validated_data['region_name']
