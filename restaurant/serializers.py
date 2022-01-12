@@ -1,12 +1,15 @@
 from rest_framework import fields, serializers
 from .models import ResturantRegisterApplication
+from location.serializers import CurrentLocationSerializer
 
 
 class ResturantRegisterApplicationserializer(serializers.ModelSerializer):
+    location = CurrentLocationSerializer()
+
     class Meta:
         model = ResturantRegisterApplication
         fields = ['name', 'user_name', 'last_name', 'password', 'email', 'mobile_number',
-                  'address', 'longitude', 'latitude', 'city', 'country', 'start_working',
+                  'address', 'location', 'start_working',
                   'end_working', 'status']
         write_only_fields = ['password']
 
@@ -16,7 +19,6 @@ class ResturantRegisterApplicationserializer(serializers.ModelSerializer):
         return resturant
 
     def update(self, instance, validated_data):
-
         instance.name = validated_data.get('name', instance.name)
         instance.user_name = validated_data.get('user_name', instance.user_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)

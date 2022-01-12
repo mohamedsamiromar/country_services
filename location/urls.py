@@ -1,8 +1,7 @@
 from django.urls import path
-from location import views as current_view
+from location import views
 from django_restful_admin import admin as api_admin
 
 urlpatterns = [
-    path('apiadmin/', api_admin.site.urls),
-    path('current_location', current_view.current_location_view, name='get_current_location'),
+    path('current_location', views.get_current_location, name='get_current_location'),
 ]
