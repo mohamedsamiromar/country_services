@@ -1,5 +1,5 @@
 from rest_framework import fields, serializers
-from .models import ResturantRegisterApplication
+from .models import ResturantRegisterApplication, Menu
 from location.serializers import CurrentLocationSerializer
 
 
@@ -33,3 +33,12 @@ class ResturantRegisterApplicationserializer(serializers.ModelSerializer):
         instance.end_working = validated_data.get('end_working', instance.end_working)
         instance.status = validated_data.get('status', instance.status)
         instance.save()
+
+
+class MenuSerializer(serializers.Serializer):
+    sandwiches = serializers.CharField()
+    meal = serializers.CharField()
+
+    def create(self, validated_data):
+        return Menu.objects.create(**validated_data)
+
