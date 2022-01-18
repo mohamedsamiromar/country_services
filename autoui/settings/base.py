@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'service',
     'vacance',
     'accounts',
+    'pharmacy',
     # allauth
     'django.contrib.sites',
     'allauth',

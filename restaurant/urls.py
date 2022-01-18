@@ -1,7 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . views import ResturantRegisterApplicationView, MenuView
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('api-menu/', MenuView, basename='menu')
 
 urlpatterns =[
-    path('/api-resturant/', ResturantRegisterApplicationView.as_view(), name='resturant'),
-    path('/api-menu/', MenuView.as_view(), name='menu'),
+    path('', include(router.urls)),
+    path('api-resturant/', ResturantRegisterApplicationView.as_view(), name='resturant'),
 ]
