@@ -34,8 +34,15 @@ class ResturantProfile(BaseModel):
     menu = models.ForeignKey('Menu',
                              on_delete=models.CASCADE,
                              null=True, blank=True, default=False)
-    city = models.CharField(max_length=75, null=True, blank=True, default=False)
-    country = models.CharField(max_length=75, null=True, blank=True, default=False)
+    country = models.CharField(
+        max_length=55, null=True, blank=True, default=False)
+    city = models.CharField(
+        max_length=75, null=True, default=False)
+    region_name = models.CharField(
+        max_length=75, null=True, default=False)
+    longitude = models.CharField(max_length=20, null=True, blank=True, default=False)
+    latitude = models.CharField(max_length=20, null=True, blank=True, default=False)
+
     occupied_table = models.IntegerField(null=True, blank=True, default=False)
     available_table = models.IntegerField(null=True, blank=True, default=False)
     status = models.CharField(max_length=155, choices=(
@@ -55,12 +62,11 @@ class Menu(BaseModel):
         ('meat', 'meat'),
         ("chicks", "chicks"),
         ("cheese", "cheese")
-    ), default=False, null=True, blank=True
-                            )
+    ), default=False, null=True, blank=True)
 
 
 class DelivaryOrder(BaseModel):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    alian = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, null=True, blank=True)
     resturant = models.ForeignKey(ResturantProfile,
                                   on_delete=models.CASCADE, null=True, blank=True)

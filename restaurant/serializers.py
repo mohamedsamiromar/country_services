@@ -9,8 +9,8 @@ class ResturantRegisterApplicationserializer(serializers.ModelSerializer):
     class Meta:
         model = ResturantRegisterApplication
         fields = ['name', 'user_name', 'last_name', 'password', 'email', 'mobile_number',
-                  'address', 'location', 'start_working',
-                  'end_working', 'status']
+                  'address', 'location', 'start_working', 'country', 'city',
+                  'region_name', 'longitude', 'latitude','end_working', 'status']
         write_only_fields = ['password']
 
     def create(self, validated_data):
