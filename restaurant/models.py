@@ -1,3 +1,4 @@
+from location import models
 from location.models import *
 from django.conf import settings
 from accounts.models import Country, BaseModel
@@ -44,7 +45,18 @@ class ResturantProfile(BaseModel):
 
 
 class Menu(BaseModel):
-    pass
+    sandwiches = models.CharField(max_length=155, choices=(
+        ('meat', 'meat'),
+        ("chicks", "chicks"),
+        ("cheese", "cheese")
+    ), default=False, null=True, blank=True
+                                  )
+    meal = models.CharField(max_length=155, choices=(
+        ('meat', 'meat'),
+        ("chicks", "chicks"),
+        ("cheese", "cheese")
+    ), default=False, null=True, blank=True
+                            )
 
 
 class DelivaryOrder(BaseModel):
