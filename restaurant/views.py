@@ -1,26 +1,23 @@
+from pip._internal import self_outdated_check
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ResturantRegisterApplicationserializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from .serializers import MenuSerializer
+from . services import ResturanServices
 
 
 class ResturantRegisterApplicationView(APIView):
-    permission_classes = [AllowAny, ]
     serializer = ResturantRegisterApplicationserializer()
 
     def post(self, request):
         data = JSONParser().parse(request)
-        self.serializer(data=data)
-        if self.serializer.is_valid():
-            self.serializer.save()
-            return Response(self.serializer.data)
-        else:
-            return Response(self.serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.serializer(data=data)
+        instance = ResturanServices.register_resturant(**serializer.validated_data)
+        return Response(not serializer(instance).data, status=status.HTTP_201_CREATED)
 
 
 class MenuView(viewsets.ViewSet):

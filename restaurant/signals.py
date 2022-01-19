@@ -12,7 +12,7 @@ def send_email_resturant_app(sender, instance, created, **kwargs):
     if instance:
         template = render_to_string('templete/send_approved_email.html', {"info": instance})
         email = EmailMessage(
-            'Welcome in Our Company',
+            'Welcome in Autoui',
             template,
             base.EMAIL_HOST_USER,
             [instance.email])

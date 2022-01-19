@@ -16,8 +16,8 @@ class ResturantRegisterApplication(BaseModel):
     location = models.ForeignKey(CurrentLocation,
                                  on_delete=models.CASCADE,
                                  default=False, null=True, blank=False)
-    start_working = models.DateTimeField(null=True, blank=True)
-    end_working = models.DateTimeField(null=True, blank=True)
+    start_working =models.CharField(max_length=155, null=True, blank=True)
+    end_working = models.CharField(max_length=155, null=True, blank=True)
     status = models.IntegerField(
         choices=(
             (200, 'New'),
