@@ -7,6 +7,7 @@ from .queries import list_pharmacy
 from .serializer import pharmacySerializer
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from .services import PharmacyServices
 
 
 class PharmacyView(viewsets.ViewSet):
@@ -14,15 +15,11 @@ class PharmacyView(viewsets.ViewSet):
     serializer = pharmacySerializer
     pagination_class = BasicPagination
 
-
     def create(self, request):
         data = JSONParser().parse(request)
         self.serializer(data=data)
-        if self.serializer.is_valid():
-            self.serializer.save()
-            return Response(self.serializer.data)
-        else:
-            return Response(self.serializer.errors)
+        instance = PharmacyServices.register_pharmacy(self.serializer.validated_data)
+        return Response(self.serializer(instance).data)
 
     def list(self, request):
         query_set = list_pharmacy()

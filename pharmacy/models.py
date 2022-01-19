@@ -19,8 +19,8 @@ class Pharmacy(BaseModel):
     longitude = models.CharField(max_length=20, null=True, blank=True, default=False)
     latitude = models.CharField(max_length=20, null=True, blank=True, default=False)
 
-    start_time = models.DateTimeField(null=True, blank=True)
-    end_time = models.DateTimeField(null=True, blank=True)
+    start_time = models.CharField(max_length=75, null=True, blank=True)
+    end_time = models.CharField(max_length=75, null=True, blank=True)
     mobile_number = models.IntegerField(null=True, blank=True)
 
 
