@@ -1,3 +1,5 @@
+from statistics import mode
+from xmlrpc.client import TRANSPORT_ERROR
 from django.db import models
 from accounts.models import BaseModel
 from core.validators import _NAME_REGEX
@@ -20,3 +22,6 @@ class Alien(BaseModel):
     residence = models.ForeignKey(
         'Residence', null=True, blank=True, default=True, on_delete=models.CASCADE
     )
+    
+    country = models.CharField(max_length=75, null=True, blank=True, default=False)
+    
