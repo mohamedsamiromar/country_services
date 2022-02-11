@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # My Apps
     'authentication',
     'restaurant',
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'vacance',
     'accounts',
     'pharmacy',
+    'alien',
+
     # allauth
     'django.contrib.sites',
     'allauth',
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
     'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
