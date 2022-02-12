@@ -8,5 +8,5 @@ _NAME_REGEX = RegexValidator(
 
 
 _PHONE_REGEX = RegexValidator(
-    regex=r"^05\d{8}$", message=_("Mobile number must be 10 digits starting with '01'."),
+    regex=r"^\d{11}$", message=_("Mobile number must be 10 digits starting with '01'."),
 )
