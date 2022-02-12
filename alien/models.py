@@ -1,3 +1,4 @@
+import email
 from statistics import mode
 from xmlrpc.client import TRANSPORT_ERROR
 from django.db import models
@@ -19,6 +20,9 @@ class Alien(BaseModel):
     last_name = models.CharField(
         max_length=75, null=True, blank=True, validators=[_NAME_REGEX], default=False
     )
+    email = models.EmailField(
+        unique=True, null=True
+        )
     residence = models.ForeignKey(
         'Residence', null=True, blank=True, default=True, on_delete=models.CASCADE
     )

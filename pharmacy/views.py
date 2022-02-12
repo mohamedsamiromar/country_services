@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 
-from autoui.pagination import BasicPagination
+from core.pagination import BasicPagination
 from pharmacy import queries
 from .serializer import pharmacySerializer
 from rest_framework.parsers import JSONParser
