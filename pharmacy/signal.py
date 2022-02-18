@@ -8,9 +8,9 @@ from .models import Pharmacy
 
 @receiver(signals.post_save, sender=Pharmacy)
 def get_longitude_and_latitude_for_pharmacy(sender, instance, create, **kwargs):
-    if instance:
+    if instance and instance.statusstatus == 201:
         if create:
-            template = render_to_string('templete/select_location_pharmacy.html', {"info": instance})
+            template = render_to_string('templete/select_location_pharmacy.html', {'info': instance})
             email = EmailMessage(
                 'Welcome in Autoui',
                 template,
