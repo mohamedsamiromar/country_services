@@ -28,25 +28,19 @@ $ mv sample.env .env
 
 Create a virtual environment
 
-## :rocket: Usage
+## :rocket: Run Project
 
 ```shell
-# Run Django in background mode
-$ docker-compose up -d
+pip install -r requirements.txt
+python manage.py runserver
 
-# Run Migrations
-$ docker-compose run --rm web python manage.py migrate
-
-# Run the server on http://localhost:8000/
-$ docker-compose run --rm web python manage.py runserver
-
-# Stop all running containers
-$ docker-compose down
-
-# Run Tests
-$ docker-compose run --rm web pytest
 ```
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+
+
+## Contributions are welcome!
+greatly appreciate your help. Feel free to suggest and implement improvements.
