@@ -1,5 +1,5 @@
 DEBUG = False
-ALLOWED_HOSTS = ['67.207.72.87', 'autourapi.cf', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {

@@ -1,4 +1,5 @@
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,36 +12,22 @@ SECRET_KEY = 'django-insecure-8ngs)3t=ydrnzvy9&e!2rpu^l!5d#t$6@_8r-1g9_2(t+s3k39
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# http://67.207.72.87/accounts/facebook/login/ Site.objects.create(
-# domain='http://67.207.72.87/accounts/facebook/login/', name='http://67.207.72.87/accounts/facebook/login/')
-ALLOWED_HOSTS = ['159.223.0.74', 'autourapi.cf', '127.0.0.1', 'localhost']
 
-# Application definition
-INSTALLED_APPS = [
+
+ALLOWED_HOSTS = []
+env = environ.Env()
+
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
-    # My Apps
-    'authentication',
-    'restaurant',
-    'location',
-    'activite',
-    'city_games',
-    'hotel',
-    'mall',
-    'mosque',
-    'park',
-    'parking',
-    'service',
-    'vacance',
-    'accounts',
-    'pharmacy',
-    'alien',
-
+THIRD_PARTY_APPS = [
     # allauth
     'django.contrib.sites',
     'allauth',
@@ -57,11 +44,31 @@ INSTALLED_APPS = [
     'django_restful_admin',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-
 ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+LOCAL_APPS = [
+    # My Apps
+    'authentication',
+    'restaurant',
+    'location',
+    'activite',
+    'city_games',
+    'hotel',
+    'mall',
+    'mosque',
+    'park',
+    'parking',
+    'service',
+    'vacance',
+    'accounts',
+    'pharmacy',
+    'alien',
+]
+# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+# Application definition
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = 9
 
@@ -70,12 +77,12 @@ LOGOUT_REDIRECT_URL = '/'
 MY_APP_URL = 'http://autourapi.cf'
 
 REST_FRAMEWORK = {
-     'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': [
-            'rest_framework.parsers.JSONParser',
-        ],
+        'rest_framework.parsers.JSONParser',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
 }
@@ -193,4 +200,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'no-reply@uat.autoui.sa'
 EMAIL_HOST_PASSWORD = '#####'
-
