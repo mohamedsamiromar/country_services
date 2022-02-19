@@ -28,7 +28,7 @@ virtualenv env
 pip install -r requirements.txt
 ```
 
-## :rocket: Usage
+## :rocket: Run Project
 
 ```shell
 python manage.py runserver
