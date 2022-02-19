@@ -18,25 +18,12 @@ I following in this project the <a class="reference external" href="https://gith
 ## :wrench: Install
 
 ```shell
-# Clone the repo
-$ git clone https://github.com/jefftriplett/django-jobs/
-
-# Change directory
-$ cd django-jobs
-
-# Rename the sample.env file to .env
-$ mv sample.env .env
+pip install -r requirements.txt
+python manage.py runserver
 ```
 
 Create a virtual environment
 
-## :rocket: Run Project
-
-```shell
-pip install -r requirements.txt
-python manage.py runserver
-
-```
 
 ## Show your support
 
