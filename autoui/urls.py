@@ -36,11 +36,12 @@ urlpatterns = [
     path('auth/registration/', include('rest_auth.registration.urls')),
     path('login', views.obtain_auth_token, name='api_token_auth'),
 
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('api-location/', include('location.urls')),
+    path('location/', include('location.urls')),
     path('auth/', include('authentication.urls')),
-    path('api/resturant/', include('restaurant.urls')),
+    path('resturant/', include('restaurant.urls')),
+    path('alien/', include('alien.urls')),
 
 ]

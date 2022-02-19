@@ -1,19 +1,16 @@
-from http import server
-import re
-from turtle import st
-from django.shortcuts import render
 from rest_framework import viewsets
-from .permission import AlienAccountAccess
+from rest_framework.parsers import JSONParser
 from .serializer import ALienRegisterSerializer
-from alien import services
 from rest_framework.response import Response
 from rest_framework import status
+from .services import AlineServices
 
 
 class RegisterAlienView(viewsets.ViewSet):
 
     def create(self, request):
-        serializer = ALienRegisterSerializer(data=request.data)
+        data = JSONParser().parse(request)
+        serializer = ALienRegisterSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        instance = services.AlineServices(**serializer.validate)
-        return Response(instance, status=status.HTTP_201_CREATED)
+        instance = AlineServices.register_alien(**serializer.validated_data)
+        return Response(ALienRegisterSerializer(instance).data, status=status.HTTP_201_CREATED)

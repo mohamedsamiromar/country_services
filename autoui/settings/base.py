@@ -1,5 +1,4 @@
 from pathlib import Path
-import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +14,6 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = []
-env = environ.Env()
 
 
 DJANGO_APPS = [
@@ -64,6 +62,7 @@ LOCAL_APPS = [
     'pharmacy',
     'alien',
 ]
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # Application definition
