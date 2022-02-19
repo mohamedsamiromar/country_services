@@ -9,7 +9,9 @@ I following in this project the <a class="reference external" href="https://gith
 
 - Django 3.0.9
 - Django Rest
-- all auth
+- allauth
+- social outh
+- rest outh
 
 ### 🏠 [Homepage](https://github.com/jefftriplett/django-jobs)
 
