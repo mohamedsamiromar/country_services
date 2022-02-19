@@ -15,10 +15,22 @@ I following in this project the <a class="reference external" href="https://gith
 
 ### 🏠 [Homepage](https://github.com/jefftriplett/django-jobs)
 
+## virtual environment
+```shell
+virtualenv env
+\env\Scripts\activate.bat
+```
+
+
 ## :wrench: Install
 
 ```shell
 pip install -r requirements.txt
+```
+
+## :rocket: Usage
+
+```shell
 python manage.py runserver
 ```
 
