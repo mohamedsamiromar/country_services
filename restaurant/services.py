@@ -1,4 +1,4 @@
-from . models import ResturantRegisterApplication
+from .models import ResturantRegisterApplication
 
 
 class ResturanServices:
@@ -7,25 +7,27 @@ class ResturanServices:
     def register_resturant(
             name: str,
             user_name: str,
-            last_name : str,
+            last_name: str,
             password: str,
-            mobile_number: int,
-            address : str,
-            location: str,
+            email: str,
+            mobile_number: str,
+            address: str,
             start_working: str,
-            end_working: str,
-            status: int,
+            country: str,
+            city: str,
+            end_working: str
     ) -> ResturantRegisterApplication:
         new_resturant = ResturantRegisterApplication.objects.create(
             name=name,
             user_name=user_name,
             last_name=last_name,
             password=password,
+            email=email,
             mobile_number=mobile_number,
             address=address,
-            location=location,
             start_working=start_working,
-            end_working=end_working,
-            status=status
+            country=country,
+            city=city,
+            end_working=end_working
         )
         return new_resturant

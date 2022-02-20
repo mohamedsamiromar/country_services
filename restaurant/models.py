@@ -5,6 +5,7 @@ from accounts.models import Country, BaseModel
 from location.models import CurrentLocation
 from core.validators import _NAME_REGEX
 
+
 class ResturantRegisterApplication(BaseModel):
     name = models.CharField(max_length=150, null=True, blank=True, validators=[_NAME_REGEX])
     last_name = models.CharField(max_length=25, null=True, blank=True, validators=[_NAME_REGEX])
@@ -12,8 +13,8 @@ class ResturantRegisterApplication(BaseModel):
     email = models.EmailField(unique=True, null=True, blank=True)
     mobile_number = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=155, null=True, blank=True)
-    location = models.ForeignKey(CurrentLocation,on_delete=models.CASCADE, default=False, null=True, blank=False)
-    start_working =models.CharField(max_length=155, null=True, blank=True)
+    location = models.ForeignKey(CurrentLocation, on_delete=models.CASCADE, default=False, null=True, blank=False)
+    start_working = models.CharField(max_length=155, null=True, blank=True)
     end_working = models.CharField(max_length=155, null=True, blank=True)
     status = models.IntegerField(
         choices=(
@@ -64,7 +65,7 @@ class Menu(BaseModel):
 
 class DelivaryOrder(BaseModel):
     alian = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE, null=True, blank=True)
+                              on_delete=models.CASCADE, null=True, blank=True)
     resturant = models.ForeignKey(ResturantProfile,
                                   on_delete=models.CASCADE, null=True, blank=True)
     order_count = models.IntegerField(null=True, blank=True)

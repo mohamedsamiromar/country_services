@@ -15,9 +15,10 @@ class ResturantRegisterApplicationView(APIView):
 
     def post(self, request):
         data = JSONParser().parse(request)
-        serializer = self.serializer(data=data)
-        instance = ResturanServices.register_resturant(**serializer.validated_data)
-        return Response(not serializer(instance).data, status=status.HTTP_201_CREATED)
+        serializer = ResturantRegisterApplicationserializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        # instance = ResturanServices.register_resturant(**serializer.validated_data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class MenuView(viewsets.ViewSet):
