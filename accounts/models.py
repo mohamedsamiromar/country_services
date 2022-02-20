@@ -1,5 +1,12 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from enum import Enum
+
+
+class GroupEnum(Enum):
+    ADMIN_GROUP = 'Admin'
+    ALIEN_GROUP = 'Alien'
+    SERVICE_GROUP = 'Service'
 
 
 class CustomUser(AbstractUser):
