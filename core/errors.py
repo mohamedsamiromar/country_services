@@ -11,6 +11,7 @@ class Error(Enum):
     DATA_IS_MISSING = {'code': -101, 'detail': _('Data is missing!')}
     INVALID_LONGITUDE = {'code': 0, 'detail': _('Invalid longitude!')}
     INVALID_LATITUDE = {'code': 0, 'detail': _('Invalid latitude!')}
+    EXPIRED_TOKEN = {'code': -460, 'detail': _("Your token has expired!")}
 
 
 class APIError:

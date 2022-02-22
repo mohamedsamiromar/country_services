@@ -1,21 +1,21 @@
 from rest_framework import fields, serializers
-from .models import ResturantRegisterApplication, Menu
-from location.serializers import CurrentLocationSerializer
+from .models import Menu, ResturantProfile
 
 
 class ResturantRegisterApplicationserializer(serializers.Serializer):
     name = serializers.CharField()
-    user_name = serializers.CharField()
-    last_name = serializers.CharField()
-    password = serializers.CharField(write_only=True)
-    email = serializers.CharField()
     mobile_number = serializers.CharField()
     address = serializers.CharField()
-    location = serializers.CharField(required=False, allow_null=True, allow_blank=True)
-    start_working = serializers.CharField()
+    email = serializers.CharField()
     country = serializers.CharField()
     city = serializers.CharField()
+    start_working = serializers.CharField()
     end_working = serializers.CharField()
+    occupied_table = serializers.CharField()
+    available_table = serializers.CharField()
+
+    def create(self, validated_data):
+        return ResturantProfile.objects.create(**validated_data)
 
 
 class MenuSerializer(serializers.Serializer):

@@ -1,4 +1,4 @@
-from .models import ResturantRegisterApplication
+from .models import ResturantProfile
 
 
 class ResturanServices:
@@ -6,28 +6,26 @@ class ResturanServices:
     @staticmethod
     def register_resturant(
             name: str,
-            user_name: str,
-            last_name: str,
-            password: str,
-            email: str,
             mobile_number: str,
             address: str,
-            start_working: str,
+            email: str,
             country: str,
             city: str,
-            end_working: str
-    ) -> ResturantRegisterApplication:
-        new_resturant = ResturantRegisterApplication.objects.create(
+            start_working: str,
+            end_working: str,
+            occupied_table: str,
+            available_table: str
+    ) -> ResturantProfile:
+        new_resturant = ResturantProfile.objects.create(
             name=name,
-            user_name=user_name,
-            last_name=last_name,
-            password=password,
-            email=email,
             mobile_number=mobile_number,
             address=address,
-            start_working=start_working,
+            email=email,
             country=country,
             city=city,
-            end_working=end_working
+            start_working=start_working,
+            end_working=end_working,
+            occupied_table=occupied_table,
+            available_table=available_table,
         )
         return new_resturant

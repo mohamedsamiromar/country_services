@@ -103,7 +103,7 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": False,
     "SIGNING_KEY": SECRET_KEY,
-    "AUTH_HEADER_TYPES": ('Bearer', 'JWT'),
+    "AUTH_HEADER_TYPES": ('Bearer', 'JWT')
 }
 
 
@@ -142,7 +142,7 @@ WSGI_APPLICATION = 'autoui.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'autoui_project',
+        'NAME': 'autoui_test',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

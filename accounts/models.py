@@ -6,7 +6,7 @@ from enum import Enum
 class GroupEnum(Enum):
     ADMIN_GROUP = 'Admin'
     ALIEN_GROUP = 'Alien'
-    SERVICE_GROUP = 'Service'
+    RESTURANT_GROUP = 'Resturant'
 
 
 class CustomUser(AbstractUser):
@@ -46,3 +46,10 @@ class Country(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class LoginLog(BaseModel):
+    username = models.CharField(max_length=11)
+
+    def __str__(self):
+        return '{} Logged in at {}'.format(self.username, self.created_at)

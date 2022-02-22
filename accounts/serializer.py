@@ -32,7 +32,7 @@ class AlienTokenObtainPairSerializer(TokenObtainPairSerializer):
         )
 
 
-class ServicesEmployeeTokenObtainPairSerializer(TokenObtainPairSerializer):
+class ResturantEmployeeTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
@@ -42,3 +42,13 @@ class ServicesEmployeeTokenObtainPairSerializer(TokenObtainPairSerializer):
             group=GroupEnum.SERVICE_GROUP,
             token=token
         )
+
+
+class RequestOTPSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    otp = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
