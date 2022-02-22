@@ -29,10 +29,10 @@ class ResturantProfile(BaseModel):
     occupied_table = models.CharField(max_length=35, null=True, blank=True)
     available_table = models.CharField(max_length=35, null=True, blank=True)
     status = models.CharField(max_length=155, choices=(
-
         (201, 'Open'),
         (405, 'Closed'),
     ), default='Open')
+
     resturant_status = models.IntegerField(
         choices=(
             (200, 'New'),
@@ -42,8 +42,8 @@ class ResturantProfile(BaseModel):
     )
     hidden = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Menu(BaseModel):

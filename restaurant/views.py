@@ -1,12 +1,12 @@
 from pip._internal import self_outdated_check
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ResturantRegisterApplicationserializer
+from .serializer import ResturantRegisterApplicationserializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, status
-from .serializers import MenuSerializer
+from .serializer import MenuSerializer
 from . services import ResturanServices
 
 
