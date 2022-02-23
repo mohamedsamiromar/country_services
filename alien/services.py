@@ -9,8 +9,11 @@ class AlineServices:
             last_name: str,
             country: str,
             email: str,
+            username: str,
+            password: str,
             mobile_number: str,
-            residence: CurrentLocation
+            longitude: str,
+            latitude: str
 
     ) -> Alien:
         alia_regit = Alien(
@@ -18,8 +21,11 @@ class AlineServices:
             last_name=last_name,
             country=country,
             email=email,
+            username=username,
+            password=password,
             mobile_number=mobile_number,
-            residence=residence
+            longitude=longitude,
+            latitude=latitude
         )
         alia_regit.save()
         return alia_regit

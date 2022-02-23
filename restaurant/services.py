@@ -16,7 +16,7 @@ class ResturanServices:
             occupied_table: str,
             available_table: str
     ) -> ResturantProfile:
-        new_resturant = ResturantProfile.objects.create(
+        new_resturant = ResturantProfile(
             name=name,
             mobile_number=mobile_number,
             address=address,
@@ -28,4 +28,5 @@ class ResturanServices:
             occupied_table=occupied_table,
             available_table=available_table,
         )
+        new_resturant.save()
         return new_resturant

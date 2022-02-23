@@ -142,7 +142,7 @@ WSGI_APPLICATION = 'autoui.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'autoui_test',
+        'NAME': 'autoui',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
