@@ -42,8 +42,8 @@ class ResturantProfile(BaseModel):
     )
     hidden = models.BooleanField(default=False)
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name
 
 
 class Menu(BaseModel):
