@@ -12,7 +12,6 @@ class Alien(BaseModel):
         max_length=75, null=True, blank=True, validators=[_NAME_REGEX], default=False)
     email = models.EmailField(
         unique=True, null=True)
-    username = models.CharField(max_length=75, null=True, blank=True)
     password = models.CharField(max_length=75, null=True, blank=True)
     mobile_number = models.CharField(
         max_length=15, validators=[_PHONE_REGEX], blank=True, null=True

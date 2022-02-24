@@ -1,8 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import CustomUser
-from core.errors import Error
-from location.serializers import CurrentLocationSerializer
+from .models import Alien
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,12 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ALienRegisterSerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
-    email = serializers.EmailField()
-    username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
-    mobile_number = serializers.CharField()
-    longitude = serializers.CharField()
-    latitude = serializers.CharField()
-    country = serializers.CharField()
+    user = UserSerializer()
+
+    class Meta:
+        model = Alien
+        fields = '__all__'
+

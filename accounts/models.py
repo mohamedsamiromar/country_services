@@ -25,6 +25,13 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    class Meta:
+        ordering = ('username', 'email', 'password')
+
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        return super().save()(*args, **kwargs)
+
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
