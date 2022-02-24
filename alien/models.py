@@ -1,9 +1,11 @@
 from django.db import models
 from accounts.models import BaseModel
 from core.validators import _NAME_REGEX, _PHONE_REGEX
+from accounts.models import CustomUser
 
 
 class Alien(BaseModel):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='alien_user', null=True, blank=True)
     first_name = models.CharField(
         max_length=75, null=True, blank=True, validators=[_NAME_REGEX], default=False)
     last_name = models.CharField(
