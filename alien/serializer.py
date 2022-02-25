@@ -12,9 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ALienRegisterSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Alien
         fields = '__all__'
 
+    def create(self, validated_data):
+        return Alien.objects.create(validated_data)

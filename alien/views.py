@@ -11,6 +11,6 @@ class RegisterAlienView(viewsets.ViewSet):
     def create(self, request):
         data = JSONParser().parse(request)
         serializer = ALienRegisterSerializer(data=data)
-        serializer.is_valid()
+        serializer.is_valid(raise_exception=True)
         instance = AlineServices.register_alien(**serializer.validated_data)
         return Response(ALienRegisterSerializer(instance).data, status=status.HTTP_201_CREATED)

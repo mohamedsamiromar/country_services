@@ -14,8 +14,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(
         max_length=255, blank=True, null=True)
-    middle_name = models.CharField(
-        max_length=255, blank=True, null=True)
     last_name = models.CharField(
         max_length=255, blank=True, null=True)
 
@@ -40,19 +38,6 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-class Country(BaseModel):
-    country_code = models.CharField(max_length=200)
-    name = models.CharField(choices=(
-        ('FRA', 'France'),
-        ('SWZ', 'Switzerland'),
-        ('BLG', 'Belgium'),
-    ), blank=True, null=True, max_length=150, default=False
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class LoginLog(BaseModel):
