@@ -22,15 +22,15 @@ def welcome_alien(sender, instance, create, **kwargs):
 
 @receiver(signals.post_save, sender=Alien)
 def create_profile(sender, instance, created, *args, **kwargs):
-    if created and instance:
+    if created:
         new_user = CustomUser(
             username=instance.username,
-            email=instance.email,
+            password=instance.password,
             first_name=instance.first_name,
             last_name=instance.last_name,
+            email=instance.email,
+            is_active=True
         )
         new_user.save()
-        print('created')
-
         group, created = Group.objects.get_or_create(name='Alien')
         group.user_set.add(new_user)

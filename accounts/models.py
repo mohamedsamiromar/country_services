@@ -26,9 +26,9 @@ class CustomUser(AbstractUser):
     class Meta:
         ordering = ('username', 'email', 'password')
 
-    def save(self, *args, **kwargs):
-        self.email = self.email.lower()
-        return super().save()(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.email = self.email.lower()
+    #     return super().save()(*args, **kwargs)
 
 
 class BaseModel(models.Model):
