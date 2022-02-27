@@ -7,6 +7,7 @@ class GroupEnum(Enum):
     ADMIN_GROUP = 'Admin'
     ALIEN_GROUP = 'Alien'
     RESTURANT_GROUP = 'Resturant'
+    PHARMACY_GROUP = 'Pharmacy'
 
 
 class CustomUser(AbstractUser):
@@ -26,9 +27,9 @@ class CustomUser(AbstractUser):
     class Meta:
         ordering = ('username', 'email', 'password')
 
-    # def save(self, *args, **kwargs):
-    #     self.email = self.email.lower()
-    #     return super().save()(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        return super().save()(*args, **kwargs)
 
 
 class BaseModel(models.Model):

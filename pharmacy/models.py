@@ -5,18 +5,29 @@ from accounts.models import BaseModel
 
 
 class Pharmacy(BaseModel):
-    name = models.CharField(
+    country = [
+        ('FRA', 'French'),
+        ('SWZ', 'Switzerland'),
+        ('BLG', 'Belgium'),
+    ]
+
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('P', 'Prefer not to answer'),
+    )
+    first_name = models.CharField(max_length=75, null=True, blank=True)
+    last_name = models.CharField(max_length=75, null=True, blank=True)
+    username = models.CharField(
         max_length=155, null=True, blank=True, default=False)
+    password = models.CharField(max_length=75, null=True, blank=True)
+    email = models.EmailField(unique=True, null=True)
     address = models.CharField(
         max_length=255, null=True, blank=True, default=False)
     country = models.CharField(
-        max_length=55, null=True, blank=True, default=False)
+        max_length=55, choices=country ,null=True, blank=True, default=False)
     city = models.CharField(
         max_length=75, null=True, default=False)
-    region_name = models.CharField(
-        max_length=75, null=True, default=False)
-    location = models.ForeignKey(
-        CurrentLocation, on_delete=models.CASCADE, null=True, blank=True, related_name='pharmacy_location')
     start_time = models.CharField(max_length=75, null=True, blank=True)
     end_time = models.CharField(max_length=75, null=True, blank=True)
     mobile_number = models.IntegerField(null=True, blank=True)

@@ -3,7 +3,7 @@ from pharmacy import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('api-pharmacy', views.PharmacyView, basename='api-pharmacy'),
+router.register('register-pharmacy', views.PharmacyView, basename='api-pharmacy'),
 
 urlpatterns = [
     path('', include(router.urls)),

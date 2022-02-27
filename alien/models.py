@@ -4,7 +4,7 @@ from core.validators import _NAME_REGEX, _PHONE_REGEX
 
 
 class Alien(BaseModel):
-    user_types = [
+    country = [
         ('FRA', 'French'),
         ('SWZ', 'Switzerland'),
         ('BLG', 'Belgium'),
@@ -30,6 +30,6 @@ class Alien(BaseModel):
     longitude = models.CharField(max_length=20, null=True, blank=True)
     latitude = models.CharField(max_length=20, null=True, blank=True)
     country = models.CharField(
-        max_length=75, null=True, blank=True, default=False, choices=user_types)
+        max_length=75, null=True, blank=True, default=False, choices=country)
 
     REQUIRED_FIELDS = ['username', 'password', 'email']

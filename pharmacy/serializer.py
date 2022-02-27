@@ -3,16 +3,17 @@ from .models import Pharmacy
 
 
 class pharmacySerializer(serializers.Serializer):
-    name = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    username = serializers.CharField()
+    password = serializers.CharField()
+    email = serializers.CharField()
     address = serializers.CharField()
     country = serializers.CharField()
     city = serializers.CharField()
-    region_name = serializers.CharField()
-    longitude = serializers.FloatField()
-    latitude = serializers.FloatField()
-    start_time = serializers.DateTimeField()
-    end_time = serializers.DateTimeField()
-    mobile_number = serializers.IntegerField()
+    start_time = serializers.CharField()
+    end_time = serializers.CharField()
+    mobile_number = serializers.CharField()
 
     def create(self, validated_data):
         return Pharmacy.objects.create(**validated_data)

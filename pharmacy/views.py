@@ -11,15 +11,14 @@ from .services import PharmacyServices
 
 
 class PharmacyView(viewsets.ViewSet):
-    permission_classes = [IsAuthenticated]
     serializer = pharmacySerializer
     pagination_class = BasicPagination
 
     def create(self, request):
-        data = JSONParser().parse(request)
-        self.serializer(data=data)
-        instance = PharmacyServices.register_pharmacy(self.serializer.validated_data)
-        return Response(self.serializer(instance).data)
+        serializer= pharmacySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = PharmacyServices.register_pharmacy(**serializer.validated_data)
+        return Response(pharmacySerializer(instance).data)
 
     def list(self, request):
         query_set = queries.list_pharmacy()

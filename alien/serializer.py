@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 from accounts.models import CustomUser
@@ -12,10 +13,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ALienRegisterSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Alien
         fields = '__all__'
 
     def create(self, validated_data):
         return Alien.objects.create(validated_data)
+
+    group = Group.objects.get_or_create(name='Alien')
