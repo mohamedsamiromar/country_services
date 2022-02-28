@@ -30,6 +30,7 @@ def create_custom_user(sender, instance, create, **kwargs):
         if instance.status is 201:
             new_user = CustomUser.objects.create(
                 username=instance.username,
+                password=instance.passwprd,
                 first_name=instance.first_name,
                 last_name=instance.last_name,
                 email=instance.email

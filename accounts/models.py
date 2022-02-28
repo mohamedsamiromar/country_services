@@ -8,6 +8,7 @@ class GroupEnum(Enum):
     ALIEN_GROUP = 'Alien'
     RESTURANT_GROUP = 'Resturant'
     PHARMACY_GROUP = 'Pharmacy'
+    PARKING_GROUP = 'Parking'
 
 
 class CustomUser(AbstractUser):
