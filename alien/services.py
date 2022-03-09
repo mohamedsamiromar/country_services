@@ -1,6 +1,5 @@
-from location.models import CurrentLocation
+from django.contrib.auth.models import Group
 from .models import Alien
-from accounts.models import CustomUser
 
 
 class AlineServices:
@@ -17,7 +16,7 @@ class AlineServices:
             latitude: str,
             country: str
     ) -> Alien:
-        alia_regit = Alien(
+        new_alien = Alien(
             first_name=first_name,
             last_name=last_name,
             email=email,
@@ -29,5 +28,7 @@ class AlineServices:
             latitude=latitude,
             country=country,
         )
-        alia_regit.save()
-        return alia_regit
+        new_alien.save()
+        my_group = Group.objects.get(name='Alien')
+        my_group.user_set.add(new_alien)
+        return new_alien

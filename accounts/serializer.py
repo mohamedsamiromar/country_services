@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Group
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
 from accounts.models import CustomUser, GroupEnum
 from accounts.services import AccountService
 
