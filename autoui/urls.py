@@ -20,9 +20,10 @@ urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('alien/token/', AlienTokenObtainPairView.as_view(),name='alien_token_obtain_pair'),
+    # path('alien/token/', AlienTokenObtainPairView.as_view(),name='alien_token_obtain_pair'),
     path('resturant/token/', ResturantTokenObtainPairView.as_view(),name='resturant_token_obtain_pair'),
 
+    path('account/', include('accounts.urls')),
     path('location/', include('location.urls')),
     path('auth/', include('authentication.urls')),
     path('resturant/', include('restaurant.urls')),

@@ -1,8 +1,10 @@
 from django.db import models
 from accounts.models import BaseModel
+from alien.models import Alien
 
 
-class Parking(BaseModel):
+class ParkingProfile(BaseModel):
+    name = models.CharField(max_length=150, null=True, unique=True, blank=True)
     username = models.CharField(max_length=10, unique=True, null=True)
     email = models.EmailField(unique=True, null=True)
     first_name = models.CharField(
@@ -19,7 +21,8 @@ class Parking(BaseModel):
     region_name = models.CharField(max_length=20, null=True, blank=True)
     longitude = models.CharField(max_length=20, null=True, blank=True)
     latitude = models.CharField(max_length=20, null=True, blank=True)
-    is_available = models.BooleanField(default=True)
+    parking_number = models.IntegerField(null=True, blank=True)
+    is_available = models.BooleanField(default=False)
     status = models.IntegerField(
         choices=(
             (200, 'New'),
@@ -27,3 +30,17 @@ class Parking(BaseModel):
             (400, 'Rejected'),
         ), default=200
     )
+
+    def __str__(self):
+        return self.name
+
+
+class ParkingBooking(BaseModel):
+    parking = models.ForeignKey(
+        ParkingProfile, on_delete=models.CASCADE, null=True, blank=True
+    )
+    alien = models.OneToOneField(
+        Alien, on_delete=models.CASCADE, null=True, related_name='alien_parking', default=0)
+
+    check_in = models.DateTimeField(null=True, blank=True)
+    check_out = models.DateTimeField(null=True, blank=True)

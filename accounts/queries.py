@@ -10,8 +10,8 @@ def get_alien_with(id: CustomUser) -> CustomUser:
         raise APIError(Error.INSTANCE_NOT_FOUND)
 
 
-def get_username(username: str):
+def get_username(username: str) -> Alien:
     try:
-        CustomUser.objects.filter(username=username).first()
+        Alien.objects.filter(username=username).first()
     except CustomUser.DoesNotExist:
         raise APIError(Error.INSTANCE_NOT_FOUND)

@@ -1,3 +1,4 @@
+from allauth.account.utils import user_email
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -11,6 +12,7 @@ from accounts.services import AccountService
 from core.utils import generate_access_token, generate_refresh_token
 from alien.models import Alien
 from accounts import queries
+
 
 class UserAccountView(generics.ListAPIView):
     serializer_class = UserSerializer
@@ -29,15 +31,13 @@ class AlienTokenObtainPairView(TokenObtainPairView):
         username = request.data.get('username')
         password = request.data.get('password')
         response = Response()
-        if username is None or password is None:
-            raise exceptions.AuthenticationFailed(Error.USER_NOT_FOUND)
+        if (username is None) or (password is None):
+            raise exceptions.AuthenticationFailed(
+                'username and password required')
 
-        user = queries.get_username(username=username)
-        alien = queries.get_alien_with(id=user)
+        user = Alien.objects.filter(username=username).first()
         if user is None:
-            raise exceptions.AuthenticationFailed(Error.USER_NOT_FOUND)
-        if not user.check_password(password):
-            raise exceptions.AuthenticationFailed(Error.WORNG_PASSWORD)
+            raise exceptions.AuthenticationFailed('user not found')
 
         access_token = generate_access_token(user)
         refresh_token = generate_refresh_token(user)
@@ -46,8 +46,6 @@ class AlienTokenObtainPairView(TokenObtainPairView):
         response.data = {
             'refresh_token': refresh_token,
             'access_token': access_token,
-            'user': user.id,
-            'role': alien    # ToDo must to change it, to return the role(group) not user
         }
 
         return response

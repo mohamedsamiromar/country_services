@@ -34,9 +34,3 @@ def get_current_location(request):
         serializer.save()
         return Response(CurrentLocationSerializer(current_location).data, status=status.HTTP_200_OK)
     return Response(CurrentLocationSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# python manage.py --settings=autoui.settings runserver/syncdb
-# python manage.py runserver --settings=autoui.settings.dev
-
-
-# (venv) root@ubuntu-s-1vcpu-2gb-intel-ams3-01:~/autour-backend# python manage.py runserver 0.0.0.0:8000

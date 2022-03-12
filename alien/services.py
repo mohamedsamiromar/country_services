@@ -29,6 +29,6 @@ class AlineServices:
             country=country,
         )
         new_alien.save()
-        my_group = Group.objects.get(name='Alien')
+        my_group = Group.objects.create(name='Alien')
         my_group.user_set.add(new_alien)
         return new_alien

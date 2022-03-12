@@ -19,5 +19,3 @@ class ALienRegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Alien.objects.create(validated_data)
-
-    group = Group.objects.get_or_create(name='Alien')
