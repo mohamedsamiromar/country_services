@@ -13,6 +13,7 @@ I following this <a class="reference external" href="https://github.com/HackSoft
 - social outh
 - rest outh
 - Celery
+- JWT
 
 ### 🏠 [Homepage](https://github.com/jefftriplett/django-jobs)
 
