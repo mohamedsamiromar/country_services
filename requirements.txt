@@ -1,4 +1,5 @@
 asgiref==3.4.1
+BlockLoggingInator==1.0.6
 branca==0.4.2
 certifi==2021.10.8
 cffi==1.15.0
@@ -13,9 +14,11 @@ django-filter==21.1
 django-oauth-toolkit==1.5.0
 django-rest-auth==0.9.5
 django-rest-framework-social-oauth2==1.1.0
+django-restful-admin==1.1.3
 djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==5.0.0
+environ==1.0
 folium==0.12.1
 geocoder==0.6.0
 gunicorn==20.1.0
