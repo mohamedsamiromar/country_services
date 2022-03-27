@@ -182,12 +182,3 @@ def google_callback_token(request):
         token = Token.objects.get_or_create(user=request.user)
         content = {'token': token[0].key}
         return HttpResponse(json.dumps(content), content_type="application/json")
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)             # <-- And here
-
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
