@@ -22,7 +22,6 @@ urlpatterns = [
     path('new_password/<int:pk>', current_view.NewPassword.as_view()),
 
     path('google/callback', current_view.google_callback_token),
-    path('hello', current_view.HelloView.as_view()),
 ]
 
 # mysql -u {{your_user_name}} -p{{yourpassworkd}}
