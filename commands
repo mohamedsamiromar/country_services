@@ -1,0 +1,8 @@
+
+# run Worker
+celery -A autoui worker --pool=solo -l info
+
+
+
+
+
