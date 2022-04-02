@@ -15,7 +15,6 @@ class Error(Enum):
     WORNG_PASSWORD = {'code': -440, 'detail': _("wrong password!")}
     USER_NOT_FOUND = {'code': -460, 'detail': _("user not found!")}
 
-
 class APIError:
     def __init__(self, error: Error, extra=None):
         self.error = error

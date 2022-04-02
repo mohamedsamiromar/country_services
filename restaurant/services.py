@@ -1,5 +1,5 @@
 from .models import ResturantProfile
-
+from django.contrib.auth.models import Group
 
 class ResturanServices:
 
@@ -29,4 +29,7 @@ class ResturanServices:
             available_table=available_table,
         )
         new_resturant.save()
+        my_group = Group.objects.create(name='Resturant')
+        my_group.user_set.add(new_resturant)
         return new_resturant
+
