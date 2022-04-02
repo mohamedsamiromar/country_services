@@ -3,4 +3,4 @@
 /.idea/
 local.py
 db.sqlite3
-commands
+/commands
