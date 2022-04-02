@@ -1,8 +1,9 @@
-
-# run Worker
-celery -A autoui worker --pool=solo -l info
-
+run django-celery-beat
+ celery -A autoui beat  -l info
 
 
+ #run worker
+ celery -A autoui worker  -l info
 
-
+ #run flower
+ celery flower -A autoui --address=127.0.0.1 --port=5555
