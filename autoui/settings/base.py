@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'accounts',
     'pharmacy',
     'alien',
+    'points'
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -217,21 +218,17 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # CELERY STUFF
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Africa/Egypt'
-CELERY_RESULT_BACKEND = 'django-db'
-
-# CELERY_BEAT_SCHEDULE = {
-#     "scheduled_task": {
-#         "task": "schedule_tasks.tasks.add",
-#         "schedule": 5.0,
-#         "args": (10, 10),
-#     }
-# }
+CELERY_TIMEZONE = 'Africa/Cairo'
 
 
-# Celery Beat
-CELERY_BEAT_SCHEDULE = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_BEAT_SCHEDULE = {
+    "scheduled_task": {
+        "task": "schedule_tasks.tasks.add",
+        "schedule": 5.0,
+        "args": (10, 10),
+    }
+}
