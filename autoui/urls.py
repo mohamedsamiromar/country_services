@@ -29,6 +29,7 @@ urlpatterns = [
     path('resturant/', include('restaurant.urls')),
     path('alien/', include('alien.urls')),
     path('pharmacy/', include('pharmacy.urls')),
-    path('parking/', include('parking.urls'))
+    path('parking/', include('parking.urls')),
+    path('rating/', include('rating.urls'))
 
 ]

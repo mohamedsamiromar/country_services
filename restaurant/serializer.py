@@ -1,5 +1,5 @@
 from rest_framework import fields, serializers
-from .models import Menu, ResturantProfile
+from .models import Menu, RestaurantProfile
 
 
 class ResturantRegisterApplicationserializer(serializers.Serializer):
@@ -15,7 +15,7 @@ class ResturantRegisterApplicationserializer(serializers.Serializer):
     available_table = serializers.CharField()
 
     def create(self, validated_data):
-        return ResturantProfile.objects.create(**validated_data)
+        return RestaurantProfile.objects.create(**validated_data)
 
 
 class MenuSerializer(serializers.Serializer):

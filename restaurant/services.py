@@ -1,7 +1,8 @@
-from .models import ResturantProfile
+from .models import RestaurantProfile
 from django.contrib.auth.models import Group
 
-class ResturanServices:
+
+class RestaurantServices:
 
     @staticmethod
     def register_resturant(
@@ -15,8 +16,8 @@ class ResturanServices:
             end_working: str,
             occupied_table: str,
             available_table: str
-    ) -> ResturantProfile:
-        new_resturant = ResturantProfile(
+    ) -> RestaurantProfile:
+        new_resturant = RestaurantProfile(
             name=name,
             mobile_number=mobile_number,
             address=address,
@@ -32,4 +33,3 @@ class ResturanServices:
         my_group = Group.objects.create(name='Resturant')
         my_group.user_set.add(new_resturant)
         return new_resturant
-

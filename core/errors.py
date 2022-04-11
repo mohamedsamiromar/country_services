@@ -2,6 +2,8 @@ from typing import Iterable
 from django.utils.translation import gettext_lazy as _
 from rest_framework.exceptions import ValidationError
 from enum import Enum
+import logging
+logger = logging.getLogger('django')
 
 
 class Error(Enum):
@@ -11,9 +13,11 @@ class Error(Enum):
     DATA_IS_MISSING = {'code': -101, 'detail': _('Data is missing!')}
     INVALID_LONGITUDE = {'code': 0, 'detail': _('Invalid longitude!')}
     INVALID_LATITUDE = {'code': 0, 'detail': _('Invalid latitude!')}
+    INVALID_RATE = {'code': 0, 'detail': _('Invalid rate!')}
     EXPIRED_TOKEN = {'code': -460, 'detail': _("Your token has expired!")}
     WORNG_PASSWORD = {'code': -440, 'detail': _("wrong password!")}
     USER_NOT_FOUND = {'code': -460, 'detail': _("user not found!")}
+
 
 class APIError:
     def __init__(self, error: Error, extra=None):

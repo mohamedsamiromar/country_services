@@ -7,17 +7,17 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, status
 from .serializer import MenuSerializer
-from . services import ResturanServices
+from . services import RestaurantServices
 
 
 class ResturantRegisterApplicationView(APIView):
     serializer = ResturantRegisterApplicationserializer()
 
     def post(self, request):
-        # data = JSONParser().parse(request.data)
+
         serializer = ResturantRegisterApplicationserializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        instance = ResturanServices.register_resturant(**serializer.validated_data)
+        instance = RestaurantServices.register_resturant(**serializer.validated_data)
         return Response(ResturantRegisterApplicationserializer(instance).data
                         , status=status.HTTP_201_CREATED)
 

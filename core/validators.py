@@ -3,7 +3,8 @@ from django.core.validators import RegexValidator
 
 
 _NAME_REGEX = RegexValidator(
-    regex=r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]*$", message=_("Special characters and digits are now allowed."),
+    regex=r"^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]*$",
+    message=_("Special characters and digits are now allowed."),
 )
 
 
