@@ -1,0 +1,17 @@
+{% extends "restaurant_rating_email.html" %}
+{% load i18n %}
+{% block content %}
+
+Hello {{ info.alien.name }},
+
+We would like to know your review of a restaurant
+
+Please,
+- click Here To get your review http://127.0.0.1:8000/api-location/current_location .
+
+We would like to know your review of a restaurant, that will help us to rate the restaurant,
+Do not hesitate to evaluate restaurant
+
+Thanks, Autoui
+
+{% endblock %}

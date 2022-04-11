@@ -63,7 +63,8 @@ LOCAL_APPS = [
     'accounts',
     'pharmacy',
     'alien',
-    'points'
+    'points',
+    'rating'
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -210,7 +211,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'no-reply@uat.autoui.sa'
+EMAIL_HOST_USER = 'no-reply@uat.autoui.eg'
 EMAIL_HOST_PASSWORD = '#####'
 
 # Celery Configuration Options

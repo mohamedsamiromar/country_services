@@ -1,6 +1,6 @@
 from accounts.models import GroupEnum, CustomUser
 from core.errors import APIError, Error
-from restaurant.models import ResturantProfile
+from restaurant.models import RestaurantProfile
 from .models import LoginLog
 
 
@@ -20,7 +20,7 @@ class AccountService:
         try:
             token['roles'] = list(user.groups.all().values())
             return token
-        except ResturantProfile.DoesNotExist:
+        except RestaurantProfile.DoesNotExist:
             raise APIError(Error.NO_ACTIVE_ACCOUNT)
 
     @staticmethod
