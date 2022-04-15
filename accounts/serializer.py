@@ -24,24 +24,54 @@ class AlienTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        return AccountService.optain_access_token(
+        return AccountService.alien_optain_access_token(
             user=user,
-            group=GroupEnum.ALIEN_GROUP,
             token=token
         )
 
 
-class ResturantEmployeeTokenObtainPairSerializer(TokenObtainPairSerializer):
+class RestaurantTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        return AccountService.optain_access_token(
+        return AccountService.restaurant_optain_access_token(
             user=user,
-            group=GroupEnum.SERVICE_GROUP,
             token=token
         )
 
+
+class PharmacyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        return AccountService.pharmacy_optain_access_token(
+            user=user,
+            token=token
+        )
+
+
+class ParkingTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        return AccountService.parking_optain_access_token(
+            user=user,
+            token=token
+        )
+
+
+class HotelTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        return AccountService.hotel_optain_access_token(
+            user=user,
+            token=token
+        )
 
 class RequestOTPSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)

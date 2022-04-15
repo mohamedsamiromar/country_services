@@ -1,42 +1,67 @@
 from accounts.models import GroupEnum, CustomUser
 from core.errors import APIError, Error
-from restaurant.models import RestaurantProfile
 from .models import LoginLog
 
 
 class AccountService:
 
     @staticmethod
-    def optain_alien_access_token(user: CustomUser, token: dict) -> dict:
-        if not user.groups.filter(name=GroupEnum.ADMIN_GROUP.value).exists():
+    def alien_optain_access_token(user: CustomUser, token: dict) -> dict:
+        user = CustomUser.objects.get(pk=user.id)
+        if user.is_blocked:
+            raise APIError(Error.BLOCKED_USER)
+
+        if not user.groups.filter(name=GroupEnum.ALIEN_GROUP.value):
             raise APIError(Error.NO_ACTIVE_ACCOUNT)
         token['roles'] = list(user.groups.all().values())
         return token
 
     @staticmethod
-    def optain_resturant_acces_token(user: CustomUser, token: dict) -> dict:
-        if not user.groups.filter(name=GroupEnum.RESTURANT_GROUP.value).exists():
+    def restaurant_optain_access_token(user: CustomUser, token: dict) -> dict:
+        user = CustomUser.objects.get(pk=user.id)
+        if user.is_blocked:
+            raise APIError(Error.BLOCKED_USER)
+
+        if not user.groups.filter(name=GroupEnum.RESTURANT_GROUP.value):
             raise APIError(Error.NO_ACTIVE_ACCOUNT)
-        try:
-            token['roles'] = list(user.groups.all().values())
-            return token
-        except RestaurantProfile.DoesNotExist:
-            raise APIError(Error.NO_ACTIVE_ACCOUNT)
+        token['roles'] = list(user.groups.all().values())
+        return token
 
     @staticmethod
-    def optain_access_token(group: GroupEnum, user: CustomUser, token: dict) -> dict:
+    def pharmacy_optain_access_token(user: CustomUser, token: dict) -> dict:
+        user = CustomUser.objects.get(pk=user.id)
+        if user.is_blocked:
+            raise APIError(Error.BLOCKED_USER)
 
-        if group == GroupEnum.ADMIN_GROUP:
-            return AccountService.optain_alien_access_token(
-                user=user, token=token)
-        elif group == GroupEnum.ALIEN_GROUP:
-            return AccountService.optain_resturant_acces_token(
-                user=user, token=token)
-        elif group == GroupEnum.RESTURANT_GROUP:
-            return AccountService.optain_resturant_acces_token(
-                user=user, token=token)
-        else:
+        if not user.groups.filter(name=GroupEnum.PHARMACY_GROUP.value):
             raise APIError(Error.NO_ACTIVE_ACCOUNT)
+        token['roles'] = list(user.groups.all().values())
+        return token
+
+
+    @staticmethod
+    def parking_optain_access_token(user: CustomUser, token: dict) -> dict:
+        user = CustomUser.objects.get(pk=user.id)
+        if user.is_blocked:
+            raise APIError(Error.BLOCKED_USER)
+
+        if not user.groups.filter(name=GroupEnum.PARKING_GROUP.value):
+            raise APIError(Error.NO_ACTIVE_ACCOUNT)
+        token['roles'] = list(user.groups.all().values())
+        return token
+
+    @staticmethod
+    def hotel_optain_access_token(user: CustomUser, token: dict) -> dict:
+        user = CustomUser.objects.get(pk=user.id)
+        if user.is_blocked:
+            raise APIError(Error.BLOCKED_USER)
+
+        if not user.groups.filter(name=GroupEnum.HOTEL_GROUP.value):
+            raise APIError(Error.NO_ACTIVE_ACCOUNT)
+        token['roles'] = list(user.groups.all().values())
+        return token
+
+
 
     @staticmethod
     def login(username: str) -> None:

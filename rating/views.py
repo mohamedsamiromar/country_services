@@ -6,10 +6,11 @@ from rating.services import RestaurantRatingService
 from rating.serializer import RestaurantRateSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from alien.permission import IsAlien
 
 
 class RestaurantRateView(viewsets.ViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAlien]
 
     def create(self, request):
         restaurant_id = request.GET.get('restaurant_id')

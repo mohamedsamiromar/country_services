@@ -17,6 +17,7 @@ class Error(Enum):
     EXPIRED_TOKEN = {'code': -460, 'detail': _("Your token has expired!")}
     WORNG_PASSWORD = {'code': -440, 'detail': _("wrong password!")}
     USER_NOT_FOUND = {'code': -460, 'detail': _("user not found!")}
+    USER_IS_BLOCKED = {'code': -460, 'detail': _("User is banned!!")}
 
 
 class APIError:
