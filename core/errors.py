@@ -20,6 +20,7 @@ class Error(Enum):
     USER_IS_BLOCKED = {'code': -460, 'detail': _("User is banned!!")}
 
 
+
 class APIError:
     def __init__(self, error: Error, extra=None):
         self.error = error

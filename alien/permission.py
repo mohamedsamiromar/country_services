@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from accounts.models import CustomUser, GroupEnum
 
 
-class IsAlien(BasePermission):
+class AlienPermission(BasePermission):
     message = _('User has no admin profile or role.')
 
     def has_permission(self, request, view):

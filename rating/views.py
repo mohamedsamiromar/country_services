@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rating import queries
@@ -6,11 +6,11 @@ from rating.services import RestaurantRatingService
 from rating.serializer import RestaurantRateSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from alien.permission import IsAlien
+from alien.permission import AlienPermission
 
 
 class RestaurantRateView(viewsets.ViewSet):
-    permission_classes = [IsAlien]
+    permission_classes = [IsAuthenticated, AlienPermission]
 
     def create(self, request):
         restaurant_id = request.GET.get('restaurant_id')
