@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
 from location.models import CurrentLocation
-from accounts.models import BaseModel
+from accounts.models import BaseModel, CustomUser
 
 
 class Pharmacy(BaseModel):
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
     country = [
         ('FRA', 'French'),
         ('SWZ', 'Switzerland'),
@@ -16,12 +17,6 @@ class Pharmacy(BaseModel):
         ('F', 'Female'),
         ('P', 'Prefer not to answer'),
     )
-    first_name = models.CharField(max_length=75, null=True, blank=True)
-    last_name = models.CharField(max_length=75, null=True, blank=True)
-    username = models.CharField(
-        max_length=155, null=True, blank=True, default=False)
-    password = models.CharField(max_length=75, null=True, blank=True)
-    email = models.EmailField(unique=True, null=True)
     address = models.CharField(
         max_length=255, null=True, blank=True, default=False)
     country = models.CharField(

@@ -1,9 +1,11 @@
 from django.db import models
-from accounts.models import BaseModel
+from accounts.models import BaseModel, CustomUser
 from core.validators import _NAME_REGEX, _PHONE_REGEX
 
 
 class Alien(BaseModel):
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
+
     country = [
         ('FRA', 'French'),
         ('SWZ', 'Switzerland'),
@@ -15,15 +17,9 @@ class Alien(BaseModel):
         ('F', 'Female'),
         ('P', 'Prefer not to answer'),
     )
-    first_name = models.CharField(
-        max_length=75, null=True, blank=True, validators=[_NAME_REGEX], default=False)
-    last_name = models.CharField(
-        max_length=75, null=True, blank=True, validators=[_NAME_REGEX], default=False)
-    email = models.EmailField(
-        unique=True, null=True)
+
     gender = models.CharField(max_length=75, choices=GENDER_CHOICES, null=True, blank=True)
-    username = models.CharField(max_length=10, unique=True, null=True)
-    password = models.CharField(max_length=75, null=True, blank=True)
+
     mobile_number = models.CharField(
         max_length=15, validators=[_PHONE_REGEX], blank=True, null=True
     )

@@ -14,11 +14,10 @@ def create_profile(sender, instance, created, *args, **kwargs):
     if created:
         new_user = CustomUser(
             username=instance.username,
-            password=123123,
+            password=12313,
             first_name=instance.first_name,
             last_name=instance.last_name,
-            email=instance.email,
-            is_active=True
+            email=instance.email
         )
         new_user.save()
         my_group = Group.objects.create(name='Restaurant')
@@ -29,8 +28,7 @@ def create_profile(sender, instance, created, *args, **kwargs):
 @receiver(signals.post_save, sender=RestaurantProfile)
 def user_post_save(sender, instance, signal, *args, **kwargs):
     if not instance.is_verified:
-        # Send verification email
-        send_verification_email.delay(instance.pk)
+        send_verification_email.delay(instance.user.id)
 
 
 @receiver(signals.post_save, sender=RestaurantBooking)

@@ -1,16 +1,10 @@
 from django.db import models
-from accounts.models import BaseModel
+from accounts.models import BaseModel, CustomUser
 from alien.models import Alien
 
 
 class ParkingProfile(BaseModel):
-    name = models.CharField(max_length=150, null=True, unique=True, blank=True)
-    username = models.CharField(max_length=10, unique=True, null=True)
-    email = models.EmailField(unique=True, null=True)
-    first_name = models.CharField(
-        max_length=255, blank=True, null=True)
-    last_name = models.CharField(
-        max_length=255, blank=True, null=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
     country = [
         ('FRA', 'French'),
         ('SWZ', 'Switzerland'),

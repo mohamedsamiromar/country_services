@@ -6,7 +6,7 @@ from accounts.models import CustomUser
 
 
 class Hotel(BaseModel):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='user')
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True, validators=[_NAME_REGEX])
     email = models.EmailField(unique=True, null=True, blank=True, default=False)
     longitude = models.CharField(max_length=20, null=True, blank=True, default=False)

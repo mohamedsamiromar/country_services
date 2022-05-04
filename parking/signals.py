@@ -3,6 +3,7 @@ from django.db.models import signals
 from accounts.models import CustomUser
 from .models import ParkingProfile
 from django.contrib.auth.models import Group
+from authentication.tasks import send_verification_email
 
 
 @receiver(signals.post_save, sender=ParkingProfile)
@@ -19,3 +20,9 @@ def create_custom_user(sender, instance, create, **kwargs):
         my_group = Group.objects.create(name='Parking')
         my_group.user_set.add(new_user)
         my_group.save()
+
+
+@receiver(signals.post_save, sender=ParkingProfile)
+def user_post_save(sender, instance, signal, *args, **kwargs):
+    if not instance.is_verified:
+        send_verification_email.delay(instance.user.id)

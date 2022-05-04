@@ -12,10 +12,10 @@ from core.utils import generate_token
 def send_verification_email(user_id):
     try:
         user = CustomUser.objects.get(pk=user_id)
+        user.is_active = True
+        user.save()
         token = generate_token(user.id)
-
-        template = render_to_string('verification_code.html', {"name": user.first_name,
-                                                               "reset_password_link": f'{Conf.WEBSITE_URL()}/auth/reset-password/{token}'}),
+        template = render_to_string('verification_code.html', {"name": user.first_name, "reset_password_link": f'{Conf.WEBSITE_URL()}/auth/reset-password/{token}'})
         email = send_mail(
             'VerifyEmail',
             template,
