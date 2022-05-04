@@ -17,7 +17,7 @@ class RestaurantServices:
             occupied_table: str,
             available_table: str
     ) -> RestaurantProfile:
-        new_resturant = RestaurantProfile(
+        new_restaurant = RestaurantProfile(
             name=name,
             mobile_number=mobile_number,
             address=address,
@@ -29,7 +29,7 @@ class RestaurantServices:
             occupied_table=occupied_table,
             available_table=available_table,
         )
-        new_resturant.save()
-        my_group = Group.objects.create(name='Resturant')
-        my_group.user_set.add(new_resturant)
-        return new_resturant
+        new_restaurant.save()
+        my_group = Group.objects.create(name='Restaurant')
+        my_group.user_set.add(new_restaurant)
+        my_group.save()

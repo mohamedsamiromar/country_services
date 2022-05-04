@@ -5,7 +5,7 @@ from rating import queries
 
 class RestaurantRatingService:
     @staticmethod
-    def restauran_rating(
+    def restaurant_rating(
             rate: int,
             comment: str,
             restaurant: RestaurantProfile
@@ -16,7 +16,7 @@ class RestaurantRatingService:
         )
         rating.save()
 
-        rate_resturant = queries.get_restaurant_booking(restaurant=restaurant)
-        rate_resturant.restaurant = rating.id
-        rate_resturant.save()
+        rate_restaurant = queries.get_restaurant_booking(restaurant=restaurant)
+        rate_restaurant.restaurant = rating.id
+        rate_restaurant.save()
         return rating

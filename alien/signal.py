@@ -32,5 +32,6 @@ def create_profile(sender, instance, created, *args, **kwargs):
             is_active=True
         )
         new_user.save()
-        group, created = Group.objects.get_or_create(name='Alien')
-        group.user_set.add(new_user)
+        my_group = Group.objects.create(name='Alien')
+        my_group.user_set.add(new_user)
+        my_group.save()

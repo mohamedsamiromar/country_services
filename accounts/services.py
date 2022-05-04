@@ -1,6 +1,5 @@
 from accounts.models import GroupEnum, CustomUser
 from core.errors import APIError, Error
-
 from restaurant.models import RestaurantProfile
 from .models import LoginLog
 

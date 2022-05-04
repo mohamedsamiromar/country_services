@@ -6,7 +6,7 @@ from enum import Enum
 class GroupEnum(Enum):
     ADMIN_GROUP = 'Admin'
     ALIEN_GROUP = 'Alien'
-    RESTURANT_GROUP = 'Resturant'
+    Restaurant_GROUP = 'Restaurant'
     PHARMACY_GROUP = 'Pharmacy'
     PARKING_GROUP = 'Parking'
     HOTEL_GROUP = 'Hotel'

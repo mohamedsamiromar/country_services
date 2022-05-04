@@ -16,7 +16,7 @@ class RestaurantRateView(viewsets.ViewSet):
         restaurant_id = request.GET.get('restaurant_id')
         serializer = RestaurantRateSerializer(data=request.data)
         get_restaurant = queries.get_restaurant(id=restaurant_id)
-        instance = RestaurantRatingService.restauran_rating(
+        instance = RestaurantRatingService.restaurant_rating(
             restaurant=get_restaurant, **serializer.validated_data
         )
         return Response(RestaurantRateSerializer(instance).data, status=status.HTTP_201_CREATED)

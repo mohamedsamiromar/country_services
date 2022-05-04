@@ -35,6 +35,7 @@ def create_custom_user(sender, instance, create, **kwargs):
                 last_name=instance.last_name,
                 email=instance.email
             )
-
-            group, created = Group.objects.get_or_create(name='Pharmacy')
-            group.user_set.add(new_user)
+            new_user.save()
+            my_group = Group.objects.create(name='Pharmacy')
+            my_group.user_set.add(new_user)
+            my_group.save()
