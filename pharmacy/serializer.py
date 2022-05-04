@@ -6,7 +6,6 @@ class pharmacySerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     username = serializers.CharField()
-    password = serializers.CharField()
     email = serializers.CharField()
     address = serializers.CharField()
     country = serializers.CharField()

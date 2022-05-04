@@ -4,11 +4,26 @@ from django.conf import settings
 from accounts.models import BaseModel
 
 
-class ForgetPassword(BaseModel):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE,null=True, blank=True, default=False)
-    verification_code = models.IntegerField(null=True, blank=True, default=False)
-    time = models.TimeField(auto_now_add=True)
+class Config(BaseModel):
+    key = models.CharField(max_length=200, unique=True)
+    value = models.TextField(null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+    is_system = models.BooleanField(default=False)
+    is_private = models.BooleanField(default=True)
+    tag = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
-        return self.user, User.username
+    @property
+    def _int(self):
+        return int(self.value)
+
+    @property
+    def _float(self):
+        return float(self.value)
+
+    @property
+    def _boolean(self):
+        if self.value.lower() in ['true', 'yes', '1', 'yup']:
+            return True
+        else:
+            return False
+        # return bool(int(self.value))

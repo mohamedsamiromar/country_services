@@ -1,1 +1,16 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+{% block content %}
+  Hello  {{name}}
+  <br>
+    Welcome To Autoui Website
+  <br>
+  <br>
+  Enter the following link to set the password: <a href="{{reset_password_link}}">هنا</a>
+  <br>
+
+Best Regards, Autoui Team.
+{% endblock %}
+
+
 {{ code_number }}

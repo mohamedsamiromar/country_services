@@ -5,9 +5,8 @@ from django.dispatch import receiver
 from django.template.loader import render_to_string
 from accounts.models import CustomUser
 from autoui.settings import base
-from core.utils import generate_token, generate_otp
 from .models import Alien
-import json
+from authentication.tasks import send_verification_email
 
 
 @receiver(signals.post_save, sender=Alien)
@@ -39,20 +38,7 @@ def create_custom_user(sender, instance, create, **kwargs):
 
 
 @receiver(signals.post_save, sender=Alien)
-def account_activation_email(sender, instance, created, **kwargs):
-    if created:
-        token = generate_token(instance.user.id)
-        otp = generate_otp()
-
-        notification = EmailMessage(
-            type='Email',
-            template='corporates/email/account_activation.html',
-            title='Welcome To Autoui',
-            data=json.dumps({
-                "name": instance.first_name,
-                "username": instance.user.username,
-                "reset_password_link": f'{Conf.WEBSITE_URL()}/auth/reset-password/{token}',
-                "otp": otp,
-            }),
-        ).send()
-        return notification
+def user_post_save(sender, instance, signal, *args, **kwargs):
+    if not instance.is_verified:
+        # Send verification email
+        send_verification_email.delay(instance.pk)

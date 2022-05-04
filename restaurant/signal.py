@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from accounts.models import CustomUser
 from restaurant.models import RestaurantBooking, RestaurantProfile
 from django.conf import settings
+from authentication.tasks import send_verification_email
 
 
 @receiver(signals.post_save, sender=RestaurantProfile)
@@ -23,6 +24,13 @@ def create_profile(sender, instance, created, *args, **kwargs):
         my_group = Group.objects.create(name='Restaurant')
         my_group.user_set.add(new_user)
         my_group.save()
+
+
+@receiver(signals.post_save, sender=RestaurantProfile)
+def user_post_save(sender, instance, signal, *args, **kwargs):
+    if not instance.is_verified:
+        # Send verification email
+        send_verification_email.delay(instance.pk)
 
 
 @receiver(signals.post_save, sender=RestaurantBooking)

@@ -4,7 +4,6 @@ from core.errors import Error
 
 class HotelSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
-    password = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     name = serializers.CharField()
