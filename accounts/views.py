@@ -3,16 +3,11 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import exceptions
-from core.errors import APIError, Error
-from accounts.models import CustomUser
-from accounts.serializer import ResetPasswordSerializer, UserSerializer, AlienTokenObtainPairSerializer, \
+
+from accounts.serializer import UserSerializer, AlienTokenObtainPairSerializer, \
     RestaurantTokenObtainPairSerializer, PharmacyTokenObtainPairSerializer, HotelTokenObtainPairSerializer, \
     ParkingTokenObtainPairSerializer
 from accounts.services import AccountService
-from core.utils import generate_access_token, generate_refresh_token
-from alien.models import Alien
-from accounts import queries
 
 
 class UserAccountView(generics.ListAPIView):

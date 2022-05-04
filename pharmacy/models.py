@@ -31,13 +31,6 @@ class Pharmacy(BaseModel):
     start_time = models.CharField(max_length=75, null=True, blank=True)
     end_time = models.CharField(max_length=75, null=True, blank=True)
     mobile_number = models.IntegerField(null=True, blank=True)
-    status = models.IntegerField(
-        choices=(
-            (200, 'New'),
-            (201, 'Approved'),
-            (400, 'Rejected'),
-        ), default=200
-    )
 
 
 class DeliveryOrder(models.Model):

@@ -23,13 +23,6 @@ class ParkingProfile(BaseModel):
     latitude = models.CharField(max_length=20, null=True, blank=True)
     parking_number = models.IntegerField(null=True, blank=True)
     is_available = models.BooleanField(default=False)
-    status = models.IntegerField(
-        choices=(
-            (200, 'New'),
-            (201, 'Approved'),
-            (400, 'Rejected'),
-        ), default=200
-    )
 
     def __str__(self):
         return self.name

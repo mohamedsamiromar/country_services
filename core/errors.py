@@ -18,6 +18,7 @@ class Error(Enum):
     WORNG_PASSWORD = {'code': -440, 'detail': _("wrong password!")}
     USER_NOT_FOUND = {'code': -460, 'detail': _("user not found!")}
     USER_IS_BLOCKED = {'code': -460, 'detail': _("User is banned!!")}
+    USER_VERIFIED = {'code': -460, 'detail': _("User does not exist or is already verified!")}
 
 
 

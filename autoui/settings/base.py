@@ -58,8 +58,6 @@ LOCAL_APPS = [
     'mosque',
     'park',
     'parking',
-    'service',
-    'vacance',
     'accounts',
     'pharmacy',
     'alien',

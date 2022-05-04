@@ -11,31 +11,29 @@ from .models import Pharmacy
 
 @receiver(signals.post_save, sender=Pharmacy)
 def get_longitude_and_latitude_for_pharmacy(sender, instance, create, **kwargs):
-    if instance and instance.statusstatus == 201:
-        if create:
-            template = render_to_string('select_location_pharmacy.html', {'info': instance})
-            email = EmailMessage(
-                'Welcome in Autoui',
-                template,
-                base.EMAIL_HOST_USER,
-                [instance.email]
-            )
-            email.send()
-            return
+    if create:
+        template = render_to_string('select_location_pharmacy.html', {'info': instance})
+        email = EmailMessage(
+            'Welcome in Autoui',
+            template,
+            base.EMAIL_HOST_USER,
+            [instance.email]
+        )
+        email.send()
+        return
 
 
 @receiver(signals.post_save, sender=Pharmacy)
 def create_custom_user(sender, instance, create, **kwargs):
     if create:
-        if instance.status is 201:
-            new_user = CustomUser.objects.create(
-                username=instance.username,
-                password=instance.passwprd,
-                first_name=instance.first_name,
-                last_name=instance.last_name,
-                email=instance.email
-            )
-            new_user.save()
-            my_group = Group.objects.create(name='Pharmacy')
-            my_group.user_set.add(new_user)
-            my_group.save()
+        new_user = CustomUser.objects.create(
+            username=instance.username,
+            password=12313,
+            first_name=instance.first_name,
+            last_name=instance.last_name,
+            email=instance.email
+        )
+        new_user.save()
+        my_group = Group.objects.create(name='Pharmacy')
+        my_group.user_set.add(new_user)
+        my_group.save()

@@ -2,7 +2,8 @@ from django.urls import path
 from authentication import views as current_view
 from authentication.google import get_google_url
 from authentication.facebook import get_facebook_url
-from . views import RegisterView
+from .views import RegisterView
+
 urlpatterns = [
     # Register
     path('register', RegisterView.as_view(), name='register'),
