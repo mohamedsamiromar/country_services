@@ -16,9 +16,3 @@ class HotelView(APIView):
                 **serializer.validated_data
             )
             return Response(HotelSerializer(instance).data, status=status.HTTP_201_CREATED)
-
-
-# ToDo
-'''
-- Send email once the hotel approved
-'''

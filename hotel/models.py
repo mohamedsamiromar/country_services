@@ -6,19 +6,20 @@ from accounts.models import CustomUser
 
 
 class Hotel(BaseModel):
+    country = [
+        ('FRA', 'French'),
+        ('SWZ', 'Switzerland'),
+        ('BLG', 'Belgium'),
+    ]
     user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True, validators=[_NAME_REGEX])
-    email = models.EmailField(unique=True, null=True, blank=True, default=False)
-    longitude = models.CharField(max_length=20, null=True, blank=True, default=False)
-    latitude = models.CharField(max_length=20, null=True, blank=True, default=False)
 
     phone_number = models.CharField(
         max_length=150, null=True, blank=True, default=False, validators=[_PHONE_REGEX])
-    status = models.CharField(max_length=150, null=True, blank=True,
-                              choices=(
-                                  (100, 'New'),
-                                  (201, 'Approve'),
-                                  (400, 'Rejected')), default=100)
+    country = models.CharField(
+        max_length=55, choices=country, null=True, blank=True, default=False)
+
+    city = models.CharField(max_length=55, null=True, blank=True)
 
 
 class Room(BaseModel):

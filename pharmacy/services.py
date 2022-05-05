@@ -1,3 +1,4 @@
+from accounts.models import CustomUser
 from .models import Pharmacy
 from django.contrib.auth.models import Group
 
@@ -9,21 +10,19 @@ class PharmacyServices:
             first_name: str,
             last_name: str,
             username: str,
-            password: str,
             email: str,
             address: float,
             country: float,
             city: str,
             start_time: str,
             end_time: str,
-            mobile_number: int
+            mobile_number: int,
+
     ) -> Pharmacy:
+        pharmacy_user = CustomUser.objects.create(
+            email=email, username=username, first_name=first_name, last_name=last_name, password=123123)
         new_pharmacy = Pharmacy.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-            password=password,
-            email=email,
+            user=pharmacy_user.id,
             address=address,
             country=country,
             city=city,

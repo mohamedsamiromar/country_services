@@ -25,7 +25,4 @@ class Alien(BaseModel):
     )
     longitude = models.CharField(max_length=20, null=True, blank=True)
     latitude = models.CharField(max_length=20, null=True, blank=True)
-    country = models.CharField(
-        max_length=75, null=True, blank=True, default=False, choices=country)
-
     REQUIRED_FIELDS = ['username', 'password', 'email']

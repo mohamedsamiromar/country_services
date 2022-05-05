@@ -8,23 +8,21 @@ class HotelServices:
     @staticmethod
     def create_hotel(
             username: str,
-            password: str,
             first_name: str,
             last_name: str,
             email: str,
             name: str,
-            longitude: str,
-            latitude: str,
+            country: str,
+            city: str,
             phone_number: int,
     ) -> Hotel:
         hotel_user = CustomUser.objects.create(
-            name=name, email=email, username=username, password=password, first_name=first_name, last_name=last_name)
+            email=email, username=username, first_name=first_name, last_name=last_name, password=123123)
         hotel = Hotel(
-            user= hotel_user.id,
+            user=hotel_user.id,
             name=name,
-            email=email,
-            longitude=longitude,
-            latitude=latitude,
+            country=country,
+            city=city,
             phone_number=phone_number
         )
         hotel.save()

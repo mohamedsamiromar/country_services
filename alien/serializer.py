@@ -12,10 +12,18 @@ class UserSerializer(serializers.ModelSerializer):
                   'middle_name', 'last_name', 'email']
 
 
-class ALienRegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Alien
-        fields = '__all__'
+class ALienRegisterSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    country = serializers.CharField()
+    GENDER_CHOICES = serializers.CharField()
+    gender = serializers.CharField()
+    mobile_number = serializers.CharField()
+    longitude = serializers.CharField()
+    latitude = serializers.CharField()
+    REQUIRED_FIELDS = serializers.CharField()
 
     def create(self, validated_data):
         return Alien.objects.create(validated_data)

@@ -3,10 +3,13 @@ from .models import Menu, RestaurantProfile
 
 
 class ResturantRegisterApplicationserializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     name = serializers.CharField()
     mobile_number = serializers.CharField()
     address = serializers.CharField()
-    email = serializers.CharField()
     country = serializers.CharField()
     city = serializers.CharField()
     start_working = serializers.CharField()

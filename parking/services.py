@@ -1,4 +1,5 @@
 from django.contrib.auth.models import Group
+from accounts.models import CustomUser
 from alien.models import Alien
 from .models import ParkingProfile, ParkingBooking
 
@@ -19,11 +20,11 @@ class ParkingServices:
             is_available: str,
             status: str
     ) -> ParkingProfile:
+        parking_user = CustomUser.objects.create(
+            email=email, username=username, first_name=first_name, last_name=last_name, password=123123)
+
         new_parking = ParkingProfile.objects.create(
-            username=username,
-            email=email,
-            first_name=first_name,
-            last_name=last_name,
+            user=parking_user.id,
             country=country,
             city=city,
             region_name=region_name,

@@ -9,23 +9,25 @@ from accounts.models import CustomUser
 
 
 class RestaurantProfile(BaseModel):
+    country = [
+        ('FRA', 'French'),
+        ('SWZ', 'Switzerland'),
+        ('BLG', 'Belgium'),
+    ]
     user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
     name = models.CharField(
         max_length=150, null=True, blank=True, default=False, validators=[_NAME_REGEX])
     mobile_number = models.CharField(
         max_length=15, null=True, blank=True, validators=[_PHONE_REGEX])
     address = models.CharField(max_length=155, null=True, blank=True, default=False)
-    email = models.EmailField(unique=True, null=True, blank=True, default=False)
     menu = models.ForeignKey('Menu',
                              on_delete=models.CASCADE,
                              null=True, blank=True, default=False)
-    country = models.CharField(
-        max_length=55, null=True, blank=True, default=False)
-    city = models.CharField(
-        max_length=75, null=True, default=False)
 
-    longitude = models.CharField(max_length=20, null=True, blank=True)
-    latitude = models.CharField(max_length=20, null=True, blank=True)
+    country = models.CharField(
+        max_length=55, choices=country, null=True, blank=True, default=False)
+
+    city = models.CharField(max_length=55, null=True, blank=True)
 
     start_working = models.CharField(max_length=35, null=True, blank=True, default=False)
     end_working = models.CharField(max_length=35, null=True, blank=True, default=False)
@@ -37,13 +39,6 @@ class RestaurantProfile(BaseModel):
         (405, 'Closed'),
     ), default=201, null=True, blank=True)
 
-    status = models.IntegerField(
-        choices=(
-            (200, 'New'),
-            (201, 'Approved'),
-            (400, 'Rejected'),
-        ), default=200
-    )
     hidden = models.BooleanField(default=False)
 
     def __str__(self):

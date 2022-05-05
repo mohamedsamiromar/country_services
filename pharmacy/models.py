@@ -12,11 +12,6 @@ class Pharmacy(BaseModel):
         ('BLG', 'Belgium'),
     ]
 
-    GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('P', 'Prefer not to answer'),
-    )
     address = models.CharField(
         max_length=255, null=True, blank=True, default=False)
     country = models.CharField(

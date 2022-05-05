@@ -36,3 +36,5 @@ class BookingParkingView(APIView):
         )
         return Response(
             ParkingBookingSerializer(instance).data, status=status.HTTP_201_CREATED)
+
+# Todo add endpoint to allow parking is full or not full
