@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('parking-profile/', views.ParkingView.as_view()),
     path('booking-parking/', views.BookingParkingView.as_view()),
+    path('parking-status/', views.ParkingFullAndNotFull.as_view()),
 ]

@@ -54,3 +54,18 @@ class BookingParking:
             check_out=check_out
         )
         return booking
+
+
+class ParkingStatus:
+    @staticmethod
+    def parking_status(
+            parking: ParkingProfile,
+            status: str
+    ) -> ParkingProfile:
+        if status == 'full':
+            parking.status == 'Full'
+            parking.save()
+        else:
+            parking == 'NOT FULL'
+            parking.save()
+            return parking

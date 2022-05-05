@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+from parking.services import ParkingStatus
+from .permission import ParkingAccess
 from .serializer import ParkingSerializer, ParkingBookingSerializer
 from .services import ParkingServices, BookingParking
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from parking import queries
-from rest_framework.authtoken.models import Token
 
 
 class ParkingView(APIView):
@@ -37,4 +38,13 @@ class BookingParkingView(APIView):
         return Response(
             ParkingBookingSerializer(instance).data, status=status.HTTP_201_CREATED)
 
-# Todo add endpoint to allow parking is full or not full
+
+class ParkingFullAndNotFull(APIView):
+    permission_classes = [IsAuthenticated, ParkingAccess]
+
+    def get(self, request):
+        status = request.data.get('status')
+        user_parking = request.user
+        user = queries.get_parking(user=user_parking)
+        instance = ParkingStatus.parking_status(parking=user, status=status)
+        return Response(ParkingSerializer(instance), status=status.HTTP_201_CREATED)
