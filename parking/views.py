@@ -22,7 +22,7 @@ class ParkingView(APIView):
 
 
 class BookingParkingView(APIView):
-    permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated, ]
 
     def post(self, request, alien):
         serializer = ParkingBookingSerializer(data=request.data)
@@ -30,7 +30,7 @@ class BookingParkingView(APIView):
         parking = request.user.id
         get_parking = queries.get_parking(user=parking)
         serializer.is_valid(raise_exception=True)
-        instance = BookingParking.bookig_parking(
+        instance = BookingParking.booking_parking(
             alien=get_alien,
             parking=get_parking,
             **serializer.validated_data
@@ -43,8 +43,7 @@ class ParkingFullAndNotFull(APIView):
     permission_classes = [IsAuthenticated, ParkingAccess]
 
     def get(self, request):
-        status = request.data.get('status')
         user_parking = request.user
         user = queries.get_parking(user=user_parking)
-        instance = ParkingStatus.parking_status(parking=user, status=status)
+        instance = ParkingStatus.parking_status(parking=user)
         return Response(ParkingSerializer(instance), status=status.HTTP_201_CREATED)

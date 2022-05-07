@@ -41,7 +41,7 @@ class ParkingServices:
 class BookingParking:
 
     @staticmethod
-    def bookig_parking(
+    def booking_parking(
             alien: Alien,
             parking: ParkingProfile,
             check_in: str,
@@ -60,12 +60,5 @@ class ParkingStatus:
     @staticmethod
     def parking_status(
             parking: ParkingProfile,
-            status: str
     ) -> ParkingProfile:
-        if status == 'full':
-            parking.status == 'Full'
-            parking.save()
-        else:
-            parking == 'NOT FULL'
-            parking.save()
-            return parking
+        pass
