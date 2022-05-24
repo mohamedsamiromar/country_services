@@ -17,7 +17,7 @@ class ResturantRegisterApplicationView(APIView):
 
         serializer = ResturantRegisterApplicationserializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        instance = RestaurantServices.register_resturant(**serializer.validated_data)
+        instance = RestaurantServices.register_restaurant(**serializer.validated_data)
         return Response(ResturantRegisterApplicationserializer(instance).data
                         , status=status.HTTP_201_CREATED)
 

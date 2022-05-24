@@ -7,6 +7,7 @@ from tkinter.tix import Tree
 from xmlrpc.client import TRANSPORT_ERROR
 from django.db import models
 from accounts.models import BaseModel, CustomUser
+from core.validators import _PHONE_REGEX
 # Create your models here.
 
 
@@ -18,7 +19,7 @@ class ParkPofile(BaseModel):
     ]
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, related_name='user_park', blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
-    mobile_number = models.IntegerField(max_length=11, null=True, blank=True, )
+    mobile_number = models.IntegerField(null=True, blank=True, )
     country = models.CharField(max_length=55, choices=country, null=True, blank=True, default=False)
     city = models.CharField(max_length=55, null=True, blank=True)
     status = models.CharField(max_length=155, choices=(

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from .models import ParkPofile
 
 class ParkProfileSerializer(serializers.Serializer):
     name = serializers.CharField()
@@ -7,4 +6,3 @@ class ParkProfileSerializer(serializers.Serializer):
     country = serializers.CharField()
     city = serializers.CharField()
     address = serializers.CharField()
-

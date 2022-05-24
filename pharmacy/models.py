@@ -5,7 +5,7 @@ from accounts.models import BaseModel, CustomUser
 
 
 class Pharmacy(BaseModel):
-    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.DO_NOTHING, null=True, unique=True, blank=True, default='')
     country = [
         ('FRA', 'French'),
         ('SWZ', 'Switzerland'),

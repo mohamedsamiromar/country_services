@@ -9,6 +9,10 @@ class ResturantRegisterApplicationserializer(serializers.Serializer):
     last_name = serializers.CharField()
     name = serializers.CharField()
     mobile_number = serializers.CharField()
+
+    sandwiches = serializers.CharField()
+    meal = serializers.CharField()
+    
     address = serializers.CharField()
     country = serializers.CharField()
     city = serializers.CharField()
@@ -16,7 +20,6 @@ class ResturantRegisterApplicationserializer(serializers.Serializer):
     end_working = serializers.CharField()
     occupied_table = serializers.CharField()
     available_table = serializers.CharField()
-
     def create(self, validated_data):
         return RestaurantProfile.objects.create(**validated_data)
 

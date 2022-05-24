@@ -7,10 +7,7 @@ class PharmacyServices:
 
     @staticmethod
     def register_pharmacy(
-            first_name: str,
-            last_name: str,
-            username: str,
-            email: str,
+           
             address: float,
             country: float,
             city: str,
@@ -19,10 +16,7 @@ class PharmacyServices:
             mobile_number: int,
 
     ) -> Pharmacy:
-        pharmacy_user = CustomUser.objects.create(
-            email=email, username=username, first_name=first_name, last_name=last_name, password=123123)
         new_pharmacy = Pharmacy.objects.create(
-            user=pharmacy_user.id,
             address=address,
             country=country,
             city=city,

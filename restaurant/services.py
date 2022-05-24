@@ -1,4 +1,4 @@
-from .models import RestaurantProfile
+from .models import Menu, RestaurantProfile
 from django.contrib.auth.models import Group
 from accounts.models import CustomUser
 
@@ -15,16 +15,22 @@ class RestaurantServices:
             mobile_number: str,
             address: str,
             country: str,
+            city: str,
             start_working: str,
             end_working: str,
             occupied_table: str,
-            available_table: str
+            available_table: str,
+            sandwiches: str,
+            meal: str
     ) -> RestaurantProfile:
         restaurant_user = CustomUser.objects.create(
             first_name=first_name, last_name=last_name, username=username, email=email, password=123123)
+        
+        menu = Menu.objects.create(sandwiches=sandwiches, meal=meal)
 
         new_restaurant = RestaurantProfile(
-            user=restaurant_user.id,
+            user=restaurant_user,
+            menu = menu,
             name=name,
             mobile_number=mobile_number,
             address=address,
@@ -36,5 +42,5 @@ class RestaurantServices:
         )
         new_restaurant.save()
         my_group = Group.objects.create(name='Restaurant')
-        my_group.user_set.add(new_restaurant)
+        # my_group.user_set.add(new_restaurant)
         my_group.save()
