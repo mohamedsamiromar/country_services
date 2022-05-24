@@ -30,6 +30,7 @@ urlpatterns = [
     path('alien/', include('alien.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('parking/', include('parking.urls')),
-    path('rating/', include('rating.urls'))
+    path('rating/', include('rating.urls')),
+    path('park/', include('park.urls'))
 
 ]

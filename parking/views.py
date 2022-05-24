@@ -22,13 +22,12 @@ class ParkingView(APIView):
 
 
 class BookingParkingView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, ParkingAccess]
 
     def post(self, request, alien):
         serializer = ParkingBookingSerializer(data=request.data)
         get_alien = queries.get_alien(id=alien)
-        parking = request.user.id
-        get_parking = queries.get_parking(user=parking)
+        get_parking = queries.get_parking(user=request.user.id)
         serializer.is_valid(raise_exception=True)
         instance = BookingParking.booking_parking(
             alien=get_alien,
