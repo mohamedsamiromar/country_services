@@ -10,4 +10,5 @@ class ParkRegisterView(APIView):
         serializer = ParkProfileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         instance = ParkService.create_park(**serializer.validated_data)
-        return Response(ParkProfileSerializer(instance).data, status=status.HTTP_201_CREATED)
+        return Response(
+            ParkProfileSerializer(instance).data, status=status.HTTP_201_CREATED)

@@ -1,7 +1,9 @@
+from datetime import datetime
+from hotel import queries
 from accounts.models import CustomUser
-from .models import Hotel, Room
+from .models import Booking, Hotel, Room
 from django.contrib.auth.models import Group
-
+from alien.models import Alien
 
 class HotelServices:
 
@@ -43,3 +45,18 @@ class HotelServices:
         )
         room.save()
         return room
+
+class BookingService:
+    @staticmethod
+    def booking(
+        alien: Alien,
+        hotel: Hotel,
+        room: Room,
+        check_in: datetime,
+        check_out: datetime
+    ) -> Booking:
+        hotel = queries.get_hotel(id=hotel)
+        booking = Booking.objects.create(
+            alien= alien, hotel=hotel, room=room, check_in=check_in, check_out=check_out
+        )
+        return booking
