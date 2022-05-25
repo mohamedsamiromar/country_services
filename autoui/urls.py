@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 from accounts.views import AlienTokenObtainPairView, ResturantTokenObtainPairView
 from rest_framework_simplejwt import views as jwt_views
-
+from park import urls
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -31,6 +31,5 @@ urlpatterns = [
     path('pharmacy/', include('pharmacy.urls')),
     path('parking/', include('parking.urls')),
     path('rating/', include('rating.urls')),
-    path('park/', include('park.urls'))
-
+    path('park/', include('park.urls')),
 ]

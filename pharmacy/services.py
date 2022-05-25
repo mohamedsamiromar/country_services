@@ -7,16 +7,15 @@ class PharmacyServices:
 
     @staticmethod
     def register_pharmacy(
-           
-            address: float,
-            country: float,
-            city: str,
-            start_time: str,
-            end_time: str,
-            mobile_number: int,
-
+        address: float,
+        country: float,
+        city: str,
+        start_time: str,
+        end_time: str,
+        mobile_number: int
     ) -> Pharmacy:
         new_pharmacy = Pharmacy.objects.create(
+            user= user,
             address=address,
             country=country,
             city=city,
